@@ -45,12 +45,12 @@ public class QueryHelper {
 		}
 	}	
 	
-	public static void main (String[] args) throws Exception {
-		QueryHelper query = new QueryHelper();
-		ArrayList<QueryResult> stuff = query.getQuote(new String[]{"AAPL", "GOOG", "FB"});
-		
-		System.out.println(stuff);
-	}
+//	public static void main (String[] args) throws Exception {
+//		QueryHelper query = new QueryHelper();
+//		ArrayList<QueryResult> stuff = query.getQuote(new String[]{"AAPL", "GOOG", "FB"});
+//		
+//		System.out.println(stuff);
+//	}
 }
 
 //URL to get quote by symbols
