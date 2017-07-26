@@ -25,17 +25,17 @@ public class QueryResult {
         public String symbol, exchange, name, dayCode, 
         		serverTimestamp, mode, tradeTimestamp, 
         		unitCode, flag, fiftyTwoWkHighDate, fiftyTwoWkLowDate;
-        
-        public int percentChange, open, high, low, close, volume;
-        public float lastPrice, netChange, fiftyTwoWkHigh, fiftyTwoWkLow;
+        public float lastPrice, netChange, fiftyTwoWkHigh, 
+        		fiftyTwoWkLow, percentChange, open, high, low, 
+        		close, volume;
 
         public Result() { }
         
         public Result(String symbol, String exchange, String name, 
         		String dayCode, String serverTimestamp, String mode, 
         		float lastPrice, String tradeTimestamp, float netChange, 
-        		int percentChange, String unitCode, int open, int high, 
-        		int low, int close, String flag, int volume, 
+        		float percentChange, String unitCode, float open, float high, 
+        		float low, float close, String flag, float volume, 
         		float fiftyTwoWkHigh, String fiftyTwoWkHighDate, 
         		float fiftyTwoWkLow, String fiftyTwoWkLowDate) {
             this.symbol = symbol;
