@@ -20,7 +20,7 @@ public class QueryHelper {
 		CloseableHttpClient client = HttpClients.createDefault();
 		ArrayList<QueryResult> list = new ArrayList<>();
 		
-		try {
+		try { 
 			HttpGet request = new HttpGet(endpoint + KEY + sb.toString() + tail);
 			CloseableHttpResponse response = client.execute(request);
 			
@@ -45,12 +45,12 @@ public class QueryHelper {
 		}
 	}	
 	
-//	public static void main (String[] args) throws Exception {
-//		QueryHelper query = new QueryHelper();
-//		String stuff = query.getQuote(new String[]{"AAPL", "GOOG", "FB"});
-//		
-//		System.out.println(stuff);
-//	}
+	public static void main (String[] args) throws Exception {
+		QueryHelper query = new QueryHelper();
+		ArrayList<QueryResult> stuff = query.getQuote(new String[]{"AAPL", "GOOG", "FB"});
+		
+		System.out.println(stuff);
+	}
 }
 
 //URL to get quote by symbols
