@@ -1,0 +1,23 @@
+@charset "ISO-8859-1";
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.scrollmenu {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   background-color: white;
+   height:20px;
+   overflow: auto;
+   white-space: nowrap;
+}
+
+
+
+
+
