@@ -21,3 +21,6 @@ Create Table `Users`(
  primary key (`WID`),
  foreign key (`uid`) references `Users` (`uid`) 
  );
+
+Create User `testuser`@`localhost;
+Grant all on BullnotesDB.* to `testuser`@`localhost`;
