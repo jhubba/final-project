@@ -49,7 +49,7 @@ public class DatabaseConnectionFactory {
 	public Connection getDatabaseConnection() {
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/midterm", properties);
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bullnotesdb", properties);
 		} catch (SQLException e) {
 			System.err.println("Unable to obtain database connection");
 			e.printStackTrace();
