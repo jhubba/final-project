@@ -8,13 +8,12 @@
  	<constant name="struts.custom.i18n.resources" value="ApplicationResources"/>
 
  	<package name="default" extends="struts-default" >
-
-  		<action name="createAccount" class="controllers.MainPageAction" method="createAccount">
- 			<result name="createAccount" type="redirect">
- 				<param name="">/signup.jsp</param>
+  		<action name="login" class="controllers.MainPageAction" method="login">
+ 			<result name="login" type="redirect">
+ 				<param name="">/index.jsp</param>
  			</result>	
+ 			<result name="loginError">/login.jsp</result>
  		</action>	
  	</package>
- 	
- 	 		
+ 		 		
  </struts>
