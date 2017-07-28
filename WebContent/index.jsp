@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -28,22 +28,11 @@
 </nav>
 
 <footer class="bottom-footer">
-<div class="container-fluid"> 
-     <div class="row">
-          <div class="col-sm-4">
-                <span class="label label-default"> DOW</span>
-                <span name="" class="">DATA</span>
-                </div>
-                <div class="col-sm-4">
-                    <span class="label label-default">NASDAQ</span>
-                    <span name="" class="">DATA</span>
-                </div>
-                <div class="col-sm-4">
-                    <span class="label label-default">S&P 500</span>
-                    <span name="" class="">DATA</span>
-                </div>
-            </div>
-        </div>
+<div class="container-fluid">
+    <div class="row">
+        <s:action name="loadStaticQuotes!footerQuotes" executeResult="true" />
+    </div>
+</div>
 </footer>
 </body>
 </html>
