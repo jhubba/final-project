@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import services.SQLhelper;
+import services.UserAuthenticationService;
 
 public class LoginAction extends ActionSupport{
 	private static final long serialVersionUID = 1L;
@@ -32,7 +32,7 @@ public class LoginAction extends ActionSupport{
 	           addActionError(message);
 	           return "loginError";
 	       }
-	       else if (SQLhelper.isUser(true)) {
+	       else if (UserAuthenticationService.userAuthentication(getUsername(), getPassword())) {
 	    	   ServletActionContext.getRequest().getSession().setAttribute("user", getUsername());
 	    	   ServletActionContext.getRequest().getSession().setAttribute("loginTime", new Date()); 
 	           return "loginSuccess";
