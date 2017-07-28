@@ -13,12 +13,13 @@ public class QueryHelper {
 	private final String KEY = "&key=bd933c2d2f7d0545e237ce85a570637c"; 
 	private final String tail = "&fields=fiftyTwoWkHigh%2CfiftyTwoWkHighDate%2CfiftyTwoWkLow%2CfiftyTwoWkLowDate&mode=R";
 		
-	public ArrayList<QueryResult> getQuote(String[] symbols) throws Exception {
+	public QueryResult getQuote(String[] symbols) throws Exception {
 
 		String endpoint = "http://marketdata.websol.barchart.com/getQuote.json?";
 		StringBuilder sb = new StringBuilder("&symbols=").append(String.join(",", symbols));
 		CloseableHttpClient client = HttpClients.createDefault();
 		ArrayList<QueryResult> list = new ArrayList<>();
+		QueryResult qr = null;
 		
 		try { 
 			HttpGet request = new HttpGet(endpoint + KEY + sb.toString() + tail);
@@ -30,13 +31,13 @@ public class QueryHelper {
 					BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 					String output = "";
 					Gson gson = new Gson();
-					QueryResult qr = null;
+					
 					while ((output = br.readLine()) != null) {
 						qr = gson.fromJson(output, QueryResult.class);
 						list.add(qr);
 					}
 				}
-				return list;
+				return qr;
 			} finally {
 				response.close();
 			}
