@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +28,7 @@
 </nav>
 
 <footer class="bottom-footer">
+<<<<<<< HEAD
 <div class="container-fluid"> 
      <div class="row">
           <div class="col-sm-4">
@@ -44,6 +45,13 @@
                 </div>
             </div>
         </div>
+=======
+<div class="container-fluid">
+    <div class="row">
+        <s:action name="loadStaticQuotes!footerQuotes" executeResult="true" />
+    </div>
+</div>
+>>>>>>> Jorge
 </footer>
 </body>
 </html>

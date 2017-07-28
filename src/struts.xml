@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
     "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+<<<<<<< HEAD
 "http://struts.apache.org/dtds/struts-2.5.dtd">
 
  <struts>
@@ -15,3 +16,16 @@
  	</package>
  		 		
  </struts>
+=======
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<package name="default" namespace="/" extends="struts-default">
+		
+		<action name="loadStaticQuotes" class="controller.actions.StaticSymbolsAction" method="footerQuotes">
+			<result>/WEB-INF/index.jsp</result>
+		</action>
+	</package>
+</struts>
+>>>>>>> Jorge
