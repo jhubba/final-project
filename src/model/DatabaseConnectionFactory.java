@@ -16,7 +16,7 @@ public class DatabaseConnectionFactory {
 		// This may not reload properties when configuration changes - any possibly
 		// dynamic variables shouldn't load this way
 		try {
-			properties.load(Class.forName("invoice.model.DatabaseConnectionFactory").getClassLoader()
+			properties.load(Class.forName("model.DatabaseConnectionFactory").getClassLoader()
 					.getResourceAsStream("/config.properties"));
 		} catch (ClassNotFoundException | IOException e) {
 			// These errors should probably terminate execution of the application
@@ -49,7 +49,7 @@ public class DatabaseConnectionFactory {
 	public Connection getDatabaseConnection() {
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bullnotesdb", properties);
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bullnotesdb?verifyServerCertificate=false&useSSL=true", properties);
 		} catch (SQLException e) {
 			System.err.println("Unable to obtain database connection");
 			e.printStackTrace();
