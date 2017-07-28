@@ -19,5 +19,10 @@ Create Table `Users`(
  foreign key (`uid`) references `Users` (`uid`) 
  );
 
-Create User `testuser`@`localhost;
-Grant all on BullnotesDB.* to `testuser`@`localhost`;
+insert into users (username, passwordHash) values ('testuser', 1216985755);
+SELECT * FROM users
+-- Use the user we all have already setup and now in the config properties file
+-- CREATE USER 'testuser' IDENTIFIED BY 'p@ssw0rD';
+-- Grant all on BullnotesDB.* to `testuser`;
+
+
