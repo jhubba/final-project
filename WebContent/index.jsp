@@ -1,22 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="loginpage.css" rel="stylesheet" type="text/css">
-<title>Welcome to Bull Notes</title>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="dashboard.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"> </script>
+<title>Insert title here</title>
 </head>
 <body>
-<div class="content">
-  <div class="title">Create Account</div>
-  <input type="text" placeholder="Username"/>
-  <input type="password" placeholder="Password"/>
-  <input type="checkbox" id="rememberMe"/>
-  <label for="rememberMe"></label><span>I have read and agree to the <a href="#">Terms of Use </a>and <a href="#">Privacy Policy</a></span>
-  <button>Create Account</button>
-  <div class="social"> <span>or sign up with social media</span></div>
-  <div class="already">Already have an account? <a href="main.jsp">Sign In</a></div>
-</div>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">BullNotes</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Dashboard</a></li>
+      <li><a href="#">Watchlist</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+
+<footer class="bottom-footer">
+<div class="container-fluid"> 
+     <div class="row">
+          <div class="col-sm-4">
+                <span class="label label-default"> DOW</span>
+                <span name="" class="">DATA</span>
+                </div>
+                <div class="col-sm-4">
+                    <span class="label label-default">NASDAQ</span>
+                    <span name="" class="">DATA</span>
+                </div>
+                <div class="col-sm-4">
+                    <span class="label label-default">S&P 500</span>
+                    <span name="" class="">DATA</span>
+                </div>
+            </div>
+        </div>
+</footer>
 </body>
 </html>
