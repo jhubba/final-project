@@ -5,9 +5,6 @@ use `BullnotesDB`;
 Drop Table if exists `Users`;
 Create Table `Users`(
 `uid` int (10) not null Auto_Increment,
-`fname` varchar(30) not null,
-`lname` varchar(30) not null,
-`email` varchar(100) not null,
 `username` varchar(100) not null,
  `passwordHash` blob not null,
  primary key (`uid`)
