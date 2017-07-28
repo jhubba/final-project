@@ -6,7 +6,7 @@ Drop Table if exists `Users`;
 Create Table `Users`(
 `uid` int (10) not null Auto_Increment,
 `username` varchar(100) not null,
- `passwordHash` blob not null,
+ `passwordHash` BIGINT not null,
  primary key (`uid`)
  );
  
