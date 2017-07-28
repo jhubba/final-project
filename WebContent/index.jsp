@@ -8,7 +8,7 @@
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="dashboard.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"> </script>
-<title>Insert title here</title>
+<title>Bull-Notes "path of the Bulls"</title>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -32,15 +32,15 @@
      <div class="row">
           <div class="col-sm-4">
                 <span class="label label-default"> DOW</span>
-                <span name="" class="">DATA</span>
+                <span name="dow" class="">DATA</span>
                 </div>
                 <div class="col-sm-4">
                     <span class="label label-default">NASDAQ</span>
-                    <span name="" class="">DATA</span>
+                    <span name="nasdaq" class="">DATA</span>
                 </div>
                 <div class="col-sm-4">
-                    <span class="label label-default">S&P 500</span>
-                    <span name="" class="">DATA</span>
+                    <span class="label label-default">S&#38;P 500</span>
+                    <span name="sp500" class="">DATA</span>
                 </div>
             </div>
         </div>
