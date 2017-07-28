@@ -6,7 +6,7 @@ Drop Table if exists `Users`;
 Create Table `Users`(
 `uid` int (10) not null Auto_Increment,
 `username` varchar(100) not null,
- `passwordHash` blob not null,
+ `passwordHash` BIGINT not null,
  primary key (`uid`)
  );
  
@@ -19,5 +19,10 @@ Create Table `Users`(
  foreign key (`uid`) references `Users` (`uid`) 
  );
 
-Create User `testuser`@`localhost;
-Grant all on BullnotesDB.* to `testuser`@`localhost`;
+insert into users (username, passwordHash) values ('testuser', 1216985755);
+SELECT * FROM users
+-- Use the user we all have already setup and now in the config properties file
+-- CREATE USER 'testuser' IDENTIFIED BY 'p@ssw0rD';
+-- Grant all on BullnotesDB.* to `testuser`;
+
+
