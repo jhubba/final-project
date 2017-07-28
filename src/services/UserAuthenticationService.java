@@ -15,22 +15,19 @@ public class UserAuthenticationService {
 		return instance;
 	}
 
-	public static Boolean userAuthentication(String username, String password){
-		return passwordAuth(password)&&userAuth((username));
-	}
-	
-	private static Boolean passwordAuth(String password){
-			
+	public static Boolean isValidUser(String username, String password){
+		
 		java.sql.Connection conn = DatabaseConnectionFactory.getInstance().getDatabaseConnection() ;
 		PreparedStatement st = null;
 		boolean authCheck = false;
 		if(conn!=null){
 			try{
-				st = conn.prepareStatement("Select username from users where passwordHash = ?");
-				st.setLong(1, password.hashCode());
+				st = conn.prepareStatement("Select * from users where username = ? and passwordHash= ?");	
+				st.setString(1, username);
+				st.setLong(2, password.hashCode());
 				ResultSet rs = st.executeQuery();	
 				
-				if(rs.next() && rs!=null && !rs.isClosed()){				
+				if(rs.next() && !rs.isClosed()){				
 					conn.close();
 					authCheck = true;
 				}else{
@@ -43,27 +40,5 @@ public class UserAuthenticationService {
 			}
 		}
 		return authCheck;
-	}
-	
-	private static Boolean userAuth(String username){
-		String usrnm = null;
-		java.sql.Connection conn = DatabaseConnectionFactory.getInstance().getDatabaseConnection() ;
-		PreparedStatement st = null;
-		
-		if(conn!=null){
-			try{
-				st = conn.prepareStatement("Select username from users where username = ?");
-				st.setString(1, username);
-				ResultSet rs = st.executeQuery();
-				if(rs.next()&&rs!=null&&!rs.isClosed()){
-					 usrnm = rs.getString("username");
-				}
-				conn.close();
-			}
-			catch(SQLException e){				
-			}
-		}
-		
-		return usrnm.equals(username);
 	}
 }

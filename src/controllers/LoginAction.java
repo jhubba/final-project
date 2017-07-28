@@ -25,14 +25,14 @@ public class LoginAction extends ActionSupport{
 	}
 	
 	@Override
-	public String execute() throws SQLException {
+	public String execute(){
 		   
 	       if (getUsername().equals("") || getPassword().equals("")) {
 	    	   String message= "Dont leave the Username/Password blank";      
 	           addActionError(message);
 	           return "loginError";
 	       }
-	       else if (UserAuthenticationService.userAuthentication(getUsername(), getPassword())) {
+	       else if (UserAuthenticationService.isValidUser(getUsername(), getPassword())) {
 	    	   ServletActionContext.getRequest().getSession().setAttribute("user", getUsername());
 	    	   ServletActionContext.getRequest().getSession().setAttribute("loginTime", new Date()); 
 	           return "loginSuccess";
