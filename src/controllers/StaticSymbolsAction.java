@@ -1,41 +1,48 @@
 package controllers;
 
-import com.opensymphony.xwork2.ActionSupport;
 import model.*;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts2.ServletActionContext;
-
-public class StaticSymbolsAction extends ActionSupport {
-	
+public class StaticSymbolsAction extends HttpServlet {
 	private static final long serialVersionUID = 2398066631321170705L;
+	
 	private String[] symbols;
 	private float[] prices;
 	private float[] changes;
 	
 	@Override
-	public String execute() throws Exception {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		QueryHelper helper = new QueryHelper();
-		QueryResult query = (QueryResult) helper.getQuote(new String[] {"voo","iyy","vti"});
-		ArrayList<Result> quotes = (ArrayList<Result>) query.results;  
-		
-		if (quotes != null)
-		{
-			int i = 0;
-			for (Result r : quotes)
+		QueryResult query;
+		try {
+			query = (QueryResult) helper.getQuote(new String[] {"voo","iyy","vti"});
+			ArrayList<Result> quotes = (ArrayList<Result>) query.results;  
+			
+			if (quotes != null)
 			{
-				symbols[i] = r.symbol;
-				prices[i] = r.lastPrice;
-				changes[i] = r.netChange;
-				i++;
+				int i = 0;
+				for (Result r : quotes)
+				{
+					symbols[i] = r.symbol;
+					prices[i] = r.lastPrice;
+					changes[i] = r.netChange;
+					i++;
+				}
+				String quotesHtml = footerQuotes();
+				request.setAttribute("quotes", quotesHtml);
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
-			HttpServletRequest request = ServletActionContext.getRequest();
-			request.getRequestDispatcher("index.jsp").forward(ServletActionContext.getRequest(), ServletActionContext.getResponse());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return SUCCESS;
 	}
 	
 	public String footerQuotes() {
