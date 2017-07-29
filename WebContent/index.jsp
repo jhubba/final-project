@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,17 +32,8 @@
 <div class="container-fluid"> 
      <div class="row">
           <div class="col-sm-4">
-                <span class="label label-default"> DOW</span>
-                <span name="dow" class="">DATA</span>
-                </div>
-                <div class="col-sm-4">
-                    <span class="label label-default">NASDAQ</span>
-                    <span name="nasdaq" class="">DATA</span>
-                </div>
-                <div class="col-sm-4">
-                    <span class="label label-default">S&#38;P 500</span>
-                    <span name="sp500" class="">DATA</span>
-                </div>
+                <jsp:useBean id="sym" class="controllers.StaticSymbolsAction" />
+				<c:out value="${sym.sym}" />
             </div>
         </div>
 </footer>
