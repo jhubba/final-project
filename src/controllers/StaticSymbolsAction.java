@@ -1,16 +1,19 @@
 package controllers;
 
 import model.*;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StaticSymbolsAction  {
-	
-	private String[] symbols;
-	private float[] prices;
-	private float[] changes;
-	private String sym = "";
+public class StaticSymbolsAction implements Serializable {
+	private static final long serialVersionUID = -4949806602233372536L;
+	private String sym;
+	public StaticSymbolsAction() {}
 			
 	public String getSym() {
+		String[] symbols = {};
+		float[] prices = {};
+		float[] changes = {};
 		QueryHelper helper = new QueryHelper();
 		QueryResult query;
 		try {
