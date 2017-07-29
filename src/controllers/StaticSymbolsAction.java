@@ -1,4 +1,4 @@
-package controller.actions;
+package controllers;
 
 import com.opensymphony.xwork2.ActionSupport;
 import model.*;

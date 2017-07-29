@@ -28,7 +28,6 @@
 </nav>
 
 <footer class="bottom-footer">
-<<<<<<< HEAD
 <div class="container-fluid"> 
      <div class="row">
           <div class="col-sm-4">
@@ -45,13 +44,6 @@
                 </div>
             </div>
         </div>
-=======
-<div class="container-fluid">
-    <div class="row">
-        <s:action name="loadStaticQuotes!footerQuotes" executeResult="true" />
-    </div>
-</div>
->>>>>>> Jorge
 </footer>
 </body>
 </html>

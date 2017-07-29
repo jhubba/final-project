@@ -1,6 +1,5 @@
 package controllers;
 
-import java.sql.SQLException;
 import java.util.Date;
 import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
