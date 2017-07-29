@@ -32,10 +32,11 @@
 <div class="container-fluid"> 
      <div class="row">
           <div class="col-sm-4">
-                <jsp:useBean id="sym" class="controllers.StaticSymbolsAction" />
-				<c:out value="${sym.sym}" />
-            </div>
-        </div>
+                <jsp:useBean id="quotes" class="controllers.StaticSymbolsAction" />
+				<jsp:getProperty name="quotes" property="sym" /> 
+           </div>
+     </div>
+</div>
 </footer>
 </body>
 </html>
