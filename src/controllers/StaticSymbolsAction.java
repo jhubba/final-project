@@ -6,14 +6,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class StaticSymbolsAction implements Serializable {
+
 	private static final long serialVersionUID = -4949806602233372536L;
-	private String sym;
+	private String sym = "";
 	public StaticSymbolsAction() {}
 			
 	public String getSym() {
-		String[] symbols = {};
-		float[] prices = {};
-		float[] changes = {};
+		String[] symbols = new String[3];
+		float[] prices = new float[3];
+		float[] changes = new float[3];
 		QueryHelper helper = new QueryHelper();
 		QueryResult query;
 		try {
@@ -35,7 +36,7 @@ public class StaticSymbolsAction implements Serializable {
 			StringBuilder sb = new StringBuilder();		
 			for (int i = 0; i < symbols.length; i++) {
 				sb.append("<div class='col-sm-4'> <span class='label label-default'>")
-					.append(symbols[i].toUpperCase()).append("</span><span name='' class=''>")
+					.append(symbols[i].toUpperCase()).append("</span><span class='prices'>")
 					.append(prices[i] + " " + changes[i]).append("</span></div>");
 			}
 			sym = sb.toString();
