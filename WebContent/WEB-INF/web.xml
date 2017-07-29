@@ -2,11 +2,20 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
-	id="WebApp_ID" version="3.1"
->
+	id="WebApp_ID" version="3.1">
     
 <display-name>Bull-Notes</display-name>
   
+<servlet>
+	<servlet-name>loadQuotes</servlet-name>
+	<servlet-class>controller.StaticSymbolsAction</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>loadQuotes</servlet-name>
+	<url-pattern>/</url-pattern>
+</servlet-mapping>
+
+
 <filter>
 	<filter-name>struts2</filter-name>
 	<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>	
