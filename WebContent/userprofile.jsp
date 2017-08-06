@@ -1,3 +1,5 @@
+<%@page import="org.apache.struts2.ServletActionContext"%>
+<%@page import="org.apache.struts2.dispatcher.HttpParameters"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -27,14 +29,26 @@
 
 <c:out value="Welcome: ${session.user}"/> <br>
 <br>
-<form action='UserProfileAction' method='post'>
+<form action='loadWatchList' method='post'>
 	<h2>Select a WatchList </h2>
-	<select name='watchList'>
+	<select name='watchlistName' id="watchlist" onchange="this.form.submit()">
+		<option value="default" selected>Select a watch list</option>
 		<c:forEach items="${session.watchLists.getWatchlists()}" var="item">
-		<option value="${item.getWatchListName()}" selected>${item.getWatchListName()}</option>	
+		<option value="${item.getWatchListName().toString()}">${item.getWatchListName()}</option>	
 		</c:forEach>	
 	</select>
 </form>
+
+
+<s:set var="cwl" value="watchlistName"></s:set>
+
+Current Watch List: <s:property value="cwl"/><br>
+
+<s:if test="%{#cwl != null}">
+	<c:forEach items="${getTheQuotes}" var="quote">
+		<c:out value="${quote.symbol}"/> <c:out value="${quote.price}"/> <c:out value="${quote.change}"/><br>
+	</c:forEach>	
+</s:if>
 
 
 <footer class="bottom-footer">
