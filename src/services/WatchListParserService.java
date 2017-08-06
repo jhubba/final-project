@@ -1,9 +1,6 @@
 package services;
 
-import java.util.List;
-
 import model.WatchListBean;
-import model.WatchListsBean;
 
 public class WatchListParserService {
 	private static final Object instance = new Object();
@@ -31,10 +28,7 @@ public class WatchListParserService {
 
 			}
 		}
-		sb.deleteCharAt(sb.length() - 1);
-		
-		
+		sb.deleteCharAt(sb.length() - 1);				
 		return sb.toString();
-	}
-	
+	}	
 }

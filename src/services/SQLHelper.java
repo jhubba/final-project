@@ -35,7 +35,7 @@ public class SQLHelper {
 				wb.setWatchListName(rs.getString("wl_name"));
 				wb.setWatchlist(rs.getString("stockSym"));
 				watchLists.add(wb);
-			}
+			}		
 			conn.close();					
 		}
 		catch(SQLException e){

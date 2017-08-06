@@ -19,6 +19,4 @@ public class WatchListBean {
 	public void setWatchListName(String watchListName) {
 		this.watchListName = watchListName;
 	}
-
-
 }
