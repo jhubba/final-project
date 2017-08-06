@@ -21,5 +21,15 @@ public class WatchListsBean {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	public WatchListBean getWatchListName(String watchListName){
+		WatchListBean wb = new WatchListBean();
+		for(WatchListBean w : this.watchlists){
+			if(w.getWatchListName().equals(watchListName)){
+				wb = w;
+			}
+		}
+		return wb;
+	}
 
 }
