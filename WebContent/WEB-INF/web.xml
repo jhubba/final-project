@@ -16,7 +16,9 @@
 	<filter-name>struts2</filter-name>
 	<url-pattern>*.action</url-pattern>
 	<url-pattern>/login.jsp</url-pattern>
-	<url-pattern>/login</url-pattern>	
+	<url-pattern>/login</url-pattern>
+	<url-pattern>/loadWatchList</url-pattern>
+	<url-pattern>/userprofile.jsp</url-pattern>	
 </filter-mapping>
   
  <welcome-file-list>

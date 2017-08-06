@@ -3,6 +3,9 @@ package controllers;
 import java.util.Date;
 import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+
+import model.WatchListsBean;
+import services.SQLHelper;
 import services.UserAuthenticationService;
 
 public class LoginAction extends ActionSupport{
@@ -33,7 +36,11 @@ public class LoginAction extends ActionSupport{
 	       }
 	       else if (UserAuthenticationService.isValidUser(getUsername(), getPassword())) {
 	    	   ServletActionContext.getRequest().getSession().setAttribute("user", getUsername());
-	    	   ServletActionContext.getRequest().getSession().setAttribute("loginTime", new Date()); 
+	    	   ServletActionContext.getRequest().getSession().setAttribute("loginTime", new Date());
+	    	   WatchListsBean wb = new WatchListsBean();
+	    	   wb.setUsername(getUsername());
+	    	   wb.setWatchlists(SQLHelper.getUserWatchLists(getUsername()));
+	    	   ServletActionContext.getRequest().getSession().setAttribute("watchLists", wb); 
 	           return "loginSuccess";
 	       }
 	       else {
@@ -41,5 +48,5 @@ public class LoginAction extends ActionSupport{
 	           addActionError(message);       
 	           return "loginError";
 	       }
-	   }
+	}
 }

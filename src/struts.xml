@@ -9,13 +9,17 @@
  		
   		<action name="login" class="controllers.LoginAction" method="execute">
  			<result name="loginSuccess" type="redirect">
- 				<param name="location">/index.jsp</param>
+ 				<param name="location">/userprofile.jsp</param>
  			</result>	
  			<result name="loginError">/login.jsp</result>
  		</action>	
  		
  		<action name="loadStaticQuotes" class="controllers.StaticSymbolsAction" method="footerQuotes">
 			<result>/index.jsp</result>
+		</action>
+		
+		<action name="loadWatchList" class="controllers.UserProfileAction" method="loadWatchList">
+			<result name="SUCCESS">/userprofile.jsp</result>
 		</action>
 		
  	</package>		 		
