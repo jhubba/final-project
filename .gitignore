@@ -1,3 +1,6 @@
 build/classes/struts.xml
 build/classes/.gitignore
 *.properties
+bullnotesCreation.sql
+build/classes/controllers/LoginAction.class
+build/classes/controllers/StaticSymbolsAction.class
