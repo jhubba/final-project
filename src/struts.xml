@@ -22,6 +22,13 @@
 			<result name="SUCCESS">/userprofile.jsp</result>
 		</action>
 		
+		<action name="createAccount" class="controllers.CreateAccountAction" method="createAccount">
+			<result name="SUCCESS" type="redirect">
+				<param name ="location">/userprofile.jsp</param>
+			</result>
+			<result name="FAIL">/createaccount.jsp</result>
+		</action>
+		
  	</package>		 		
  </struts>
 
