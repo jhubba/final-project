@@ -37,9 +37,15 @@ private static final Object instance = new Object();
 				for (Result r : quotes)
 				{
 					WatchListQuoteBean wb = new WatchListQuoteBean();
+					wb.setName(r.name);
 					wb.setSymbol(r.symbol);
 					wb.setPrice(r.lastPrice);
 					wb.setChange(r.netChange);
+					wb.setPercentChange(r.percentChange);
+					wb.setVolume(r.volume);
+					wb.setOpen(r.open);
+					wb.setHigh(r.high);
+					wb.setLow(r.low);
 					wlqhb.addWatchListQuoteBean(wb);
 				}
 			}		
