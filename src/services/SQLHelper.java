@@ -62,13 +62,7 @@ public class SQLHelper {
 				conn.close();
 				return true;
 				
-			}
-//			while(rs.next()){				
-//				WatchListBean wb = new WatchListBean();
-//				wb.setWatchListName(rs.getString("wl_name"));
-//				wb.setWatchlist(rs.getString("stockSym"));
-//				watchLists.add(wb);
-//			}		
+			}	
 			conn.close();					
 		}
 		catch(SQLException e){
