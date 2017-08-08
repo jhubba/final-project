@@ -45,9 +45,33 @@
 Current Watch List: <s:property value="cwl"/><br>
 
 <s:if test="%{#cwl != null}">
-	<c:forEach items="${getTheQuotes}" var="quote">
-		<c:out value="${quote.symbol}"/> <c:out value="${quote.price}"/> <c:out value="${quote.change}"/><br>
-	</c:forEach>	
+<table style="border-collapse: separate; border-spacing: 10px;">
+	    <tr>
+			<th>Name</th>
+			<th>Symbol</th>
+			<th>Price</th>
+			<th>Change</th>
+			<th>Percent Change</th>
+			<th>Volume</th>
+			<th>Open</th>
+			<th>High</th>
+			<th>Low</th>
+		</tr>
+			<c:forEach items="${getTheQuotes}" var="quote">
+				<tr>			
+					<td><c:out value="${quote.name}"/></td>
+					<td><c:out value="${quote.symbol}"/></td>
+					<td><c:out value="${quote.price}"/></td>
+					<td><c:out value="${quote.change}"/></td>
+					<td><c:out value="${quote.percentChange}"/></td>
+					<td><c:out value="${quote.volume}"/></td>
+					<td><c:out value="${quote.open}"/></td>
+					<td><c:out value="${quote.high}"/></td>
+					<td><c:out value="${quote.low}"/></td>    
+			    
+				</tr>
+			</c:forEach>	
+	</table>	
 </s:if>
 
 
