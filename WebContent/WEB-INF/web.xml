@@ -19,6 +19,7 @@
 	<url-pattern>/login</url-pattern>
 	<url-pattern>/loadWatchList</url-pattern>
 	<url-pattern>/userprofile.jsp</url-pattern>	
+	<url-pattern>/searchSymbol</url-pattern>
 </filter-mapping>
   
  <welcome-file-list>
