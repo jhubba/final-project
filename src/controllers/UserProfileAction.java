@@ -6,6 +6,7 @@ import model.WatchListBean;
 import model.WatchListQuoteHolderBean;
 import model.WatchListsBean;
 import services.SQLHelper;
+import services.WatchListParserService;
 import services.WatchListSymbolHelper;
 
 public class UserProfileAction extends ActionSupport{
@@ -54,7 +55,7 @@ public class UserProfileAction extends ActionSupport{
  	   	setWlb(wlsb.getWatchListName(getWatchlistName()));   	
  	   	setSymbols(getWlb().getWatchlist());
  	   	setWlqhb(WatchListSymbolHelper.getSym(getSymbols()));
- 	   	
+
 	   	ServletActionContext.getRequest().getSession().setAttribute("getTheQuotes", getWlqhb().getWatchListHolder());
 		ServletActionContext.getRequest().getSession().setAttribute("loadWatchList", wlsb.getWatchListName(getWatchlistName()));
 		return "SUCCESS";
