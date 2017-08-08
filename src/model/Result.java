@@ -1,7 +1,10 @@
 package model;
 
-public class Result {
-    public String symbol, exchange, name, dayCode, 
+import java.io.Serializable;
+
+public class Result implements Serializable {
+	private static final long serialVersionUID = 8156476374423980566L;
+	public String symbol, exchange, name, dayCode, 
     		serverTimestamp, mode, tradeTimestamp, 
     		unitCode, flag, fiftyTwoWkHighDate, fiftyTwoWkLowDate;
     public float lastPrice, netChange, fiftyTwoWkHigh, 
