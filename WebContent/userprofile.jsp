@@ -17,38 +17,37 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">BullNotes</a>
+      <a class="navbar-brand" href="/Bull-Notes/">BullNotes</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Dashboard</a></li>
-      <li><a href="#">Watchlist</a></li>
+      <li><a href="/Bull-Notes/">Home</a></li>
+      <!-- <li><a href="#">Dashboard</a></li> -->
+      <li class="active"><a href="/Bull-Notes/userprofile.jsp">Watchlist</a></li>
     </ul>
   </div>
 </nav>
 
-<c:out value="Welcome: ${session.user}"/> <br>
-<br>
-<form action='loadWatchList' method='post'>
-	<h2>Select a WatchList </h2>
-	<select name='watchlistName' id="watchlist" onchange="this.form.submit()">
-		<option value="default" selected>Select a watch list</option>
-		<c:forEach items="${session.watchLists.getWatchlists()}" var="item">
-		<option value="${item.getWatchListName().toString()}">${item.getWatchListName()}</option>	
+<div class="container">
+	<c:out value="Welcome: ${session.user}"/> <br>
+	<br>
+	<form action='loadWatchList' method='post'>
+		<h3>Select a WatchList </h3>
+		<select name='watchlistName' id="watchlist" onchange="this.form.submit()">
+			<option value="default" selected>Select a watch list</option>
+			<c:forEach items="${session.watchLists.getWatchlists()}" var="item">
+				<option value="${item.getWatchListName().toString()}">${item.getWatchListName()}</option>	
+			</c:forEach>	
+		</select>
+	</form>
+	
+	<s:set var="cwl" value="watchlistName"></s:set>
+	Current Watch List: <s:property value="cwl"/><br>
+	<s:if test="%{#cwl != null}">
+		<c:forEach items="${getTheQuotes}" var="quote">
+			<c:out value="${quote.symbol}"/> <c:out value="${quote.price}"/> <c:out value="${quote.change}"/><br>
 		</c:forEach>	
-	</select>
-</form>
-
-
-<s:set var="cwl" value="watchlistName"></s:set>
-
-Current Watch List: <s:property value="cwl"/><br>
-
-<s:if test="%{#cwl != null}">
-	<c:forEach items="${getTheQuotes}" var="quote">
-		<c:out value="${quote.symbol}"/> <c:out value="${quote.price}"/> <c:out value="${quote.change}"/><br>
-	</c:forEach>	
-</s:if>
+	</s:if>
+</div>
 
 
 <footer class="bottom-footer">
