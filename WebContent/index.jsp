@@ -15,19 +15,38 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">BullNotes</a>
+      <a class="navbar-brand" href="/Bull-Notes/">BullNotes</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Dashboard</a></li>
-      <li><a href="#">Watchlist</a></li>
+      <li class="active"><a href="/Bull-Notes/">Home</a></li>
+<!--       <li><a href="#">Dashboard</a></li> -->
+      <li><a href="/Bull-Notes/userprofile.jsp">Watchlist</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a href="/Bull-Notes/login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
   </div>
 </nav>
-
+<div class="container">
+	<div class="row search">
+	    <div class="col-sm-8 col-sm-offset-2">
+	        <form action="searchSymbol" method="post">
+	            <div class="input-group">
+	                <input type="text" id="symbol" name="symbol" class="form-control input-lg" placeholder="Search Symbol...">
+	                <span class="input-group-btn">
+						<button class="btn btn-default btn-lg" type="submit">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+	                </span>
+	            </div>
+	        </form>
+	    </div>
+	</div><br><br><br><br>
+	
+	<c:forEach items="${query}" var="quote">
+		<c:out value="${quote.symbol}"/> <c:out value="${quote.price}"/>
+	</c:forEach>
+</div>
 <footer class="bottom-footer">
 <div class="container-fluid"> 
      <div class="row">
