@@ -44,20 +44,36 @@ public class QueryHelper {
 		} finally {
 			client.close();
 		}
-	}	
+	}
 	
-//	public static void main (String[] args) throws Exception {
-//		QueryHelper query = new QueryHelper();
-//		ArrayList<QueryResult> stuff = query.getQuote(new String[]{"AAPL", "GOOG", "FB"});
-//		
-//		System.out.println(stuff);
-//	}
+	public Result getSingleQuote(String symbol) throws Exception {
+		String endpoint = "http://marketdata.websol.barchart.com/getQuote.json?";
+		CloseableHttpClient client = HttpClients.createDefault();
+		QueryResult qr = null;
+		Result singleResult = null;
+		
+		try {
+			HttpGet request = new HttpGet(endpoint + KEY + symbol + tail);
+			CloseableHttpResponse response = client.execute(request);
+			
+			try {
+				int status = response.getStatusLine().getStatusCode();
+				if (status == 200)
+				{
+					BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+					String output = "";
+					Gson gson = new Gson();
+					while ((output = br.readLine()) != null) {
+						qr = gson.fromJson(output, QueryResult.class);
+						singleResult = qr.results.get(0);
+					}
+				}
+				return singleResult;
+			} finally {
+				response.close();
+			} 
+		} finally {
+			client.close();
+		}
+	}
 }
-
-//URL to get quote by symbols
-//http://marketdata.websol.barchart.com/
-//getQuote.json
-//?key=bd933c2d2f7d0545e237ce85a570637c
-//&symbols=AAPL%2CGOOG%2CFB
-//&fields=fiftyTwoWkHigh%2CfiftyTwoWkHighDate%2CfiftyTwoWkLow%2CfiftyTwoWkLowDate
-//&mode=I
