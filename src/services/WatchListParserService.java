@@ -12,13 +12,13 @@ public class WatchListParserService {
 		return instance;
 	}
 	
-	public String watchListAdd(String sym, WatchListBean watchlist){
+	public static String watchListAdd(String sym, WatchListBean watchlist){
 		StringBuilder sb = new StringBuilder();
 		sb.append(watchlist.getWatchlist() + "," + sym);		
 		return sb.toString();
 	}
 	
-	public String watchListRemove(String sym, WatchListBean watchlist){
+	public static String watchListRemove(String sym, WatchListBean watchlist){
 		StringBuilder sb = new StringBuilder();
 		String[] syms = watchlist.getWatchlist().split(",");
 

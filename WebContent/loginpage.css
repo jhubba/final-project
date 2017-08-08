@@ -132,49 +132,7 @@ a {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-.content .social {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-}
-.content .social span {
-  display: inline-block;
-  vertical-align: baseline;
-  padding: 0 20px;
-}
-.content .social span:before, .content .social span:after {
-  content: '';
-  display: block;
-  width: 500px;
-  position: absolute;
-  top: 0.9em;
-  border-top: 1px solid White;
-}
-.content .social span:before {
-  right: 75%;
-}
-.content .social span:after {
-  left: 75%;
-}
-.content .buttons {
-  width: 100%;
-  margin: 30px 0px;
-}
-.content .buttons button {
-  float: left;
-  width: 30%;
-  margin: 0px 1.5%;
-}
-.content .buttons button i {
-  padding-right: 7px;
-}
 
-.content .buttons:after {
-  content: "";
-  display: block;
-  clear: both;
-}
 .content .already {
   text-align: center;
   font-size: 0.9rem;
