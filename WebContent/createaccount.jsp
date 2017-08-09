@@ -8,22 +8,36 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="createaccount.css" rel="stylesheet" type="text/css">
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="dashboard.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"> </script>
 <title>Bull-Notes Account Creation</title>
 </head>
 <body>
-	<h1>Create a Bull-Notes account by filling out the from below</h1>
+<div class="content">
+	<div class="title">CreateAccount</div>
 	<h3><s:actionerror /></h3>
-	<form action="createAccount" method="post">
-		<input type="text" name="username" placeholder="Username"/><br>
-		<input type="password" name="password" placeholder="Password"/><br>
-		<input type="password" name="password2" placeholder="Confirm Password"/><br>
-		<input type="text" name="firstname" placeholder="First Name"/><br>
-		<input type="text" name="lastname" placeholder="Last Name"/><br>
-		<input type="text" name="email" placeholder="Email Address"/><br>
+	<form action="createAccount" class="createA" method="post">
+	<ul>
+	<li>
+		<input type="text" name="firstname" class="fname split" placeholder="First Name"/>
+		<input type="text" name="lastname" class="lname split" placeholder="Last Name"/>
+	</li>
+	<li>
+		<input type="text" name="username" class="username full" placeholder="Username"/>
+	</li>
+	<li>
+		<input type="password" name="password" class="password split" placeholder="Password"/>
+		<input type="password" name="password2" class="compassword split"placeholder="Confirm Password"/>
+	</li>
+	<li>
+		<input type="text" name="email" class="email full" placeholder="Email Address"/>
+	</li>
+	<li>
 		<button type="submit" value="createAccount">Create Account</button>
+	</li>
+	</ul>
 	</form>
+</div>	
 </body>
 </html>
