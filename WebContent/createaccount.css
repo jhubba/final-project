@@ -110,6 +110,10 @@ body {
     float:none;
 }
 
+a {
+  color: #BBB !important;
+}
+
 .content button {
   width: 99%;
   font-size: 18px;
@@ -168,5 +172,5 @@ body {
 
 .content .already {
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 12px;
 }

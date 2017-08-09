@@ -20,6 +20,7 @@
 		  <button type="submit" value="login">Sign In</button>
 	</form>
     	<div class="already">Need to sign up? <a href="createaccount.jsp">CreateAccount</a></div>
+    	<div class="goback"><a href="index.jsp">Return back as guest</a></div>
 </div>
 </body>
 </html>
