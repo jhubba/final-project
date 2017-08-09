@@ -34,3 +34,34 @@ body {
 .quotes {
 	background-color:white;
 }
+
+.queryName {
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.lastPrice {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.positive {
+	color: green;
+}
+
+.negative {
+	color: red;
+}
+
+.neutral {
+	color: black;
+}
+
+.details {
+	font-size: 0.8em;
+	font-style: italic;
+}
+
+.moreinfo {
+	font-size: 1.2em;
+}

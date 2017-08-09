@@ -20,6 +20,7 @@
 		
 		<action name="searchSymbol" class="controllers.SearchAction" method="execute">
 			<result name="found">/index.jsp</result>
+			<result name="null">/index.jsp</result>
 		</action>
 		
 		<action name="createAccount" class="controllers.CreateAccountAction" method="createAccount">
@@ -30,4 +31,3 @@
 		</action>
  	</package>		 		
  </struts>
-
