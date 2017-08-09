@@ -59,7 +59,9 @@ public class SQLHelper {
 				rs = st.executeUpdate();
 			} catch (SQLException e){
 			}
-			return rs
+		}
+			return rs;
+		
 				
 		}		
 	
