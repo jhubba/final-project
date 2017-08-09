@@ -32,12 +32,18 @@ public class StaticSymbolsAction implements Serializable {
 					i++;
 				}
 			}
-		
+			
 			StringBuilder sb = new StringBuilder();		
 			for (int i = 0; i < symbols.length; i++) {
 				sb.append("<div class='col-sm-4'> <span class='label label-default'>")
-					.append(symbols[i].toUpperCase()).append("</span><span class='prices'>")
-					.append(prices[i] + " " + changes[i]).append("</span></div>");
+					.append(symbols[i].toUpperCase() + ": ").append("<span class='prices'>")
+					.append(prices[i] + " ");
+				if(changes[i] < 0 ) {
+				sb.append("</span><span class='changenegative'>" + changes[i]).append("</span></span></div>");
+				}
+				else {
+				sb.append("</span><span class='changepositive'>" + changes[i]).append("</span></span></div>");
+				}
 			}
 			sym = sb.toString();
 			return sym;
