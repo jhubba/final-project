@@ -51,9 +51,8 @@ public class QueryHelper {
 		CloseableHttpClient client = HttpClients.createDefault();
 		QueryResult qr = null;
 		Result singleResult = null;
-		
 		try {
-			HttpGet request = new HttpGet(endpoint + KEY + symbol + tail);
+			HttpGet request = new HttpGet(endpoint + KEY + "&symbols=" + symbol + tail);
 			CloseableHttpResponse response = client.execute(request);
 			
 			try {
