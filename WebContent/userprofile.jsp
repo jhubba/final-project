@@ -81,12 +81,10 @@
 
 
 <footer class="bottom-footer">
-<div class="container-fluid"> 
+<div class="container-fluid">
      <div class="row">
-          <div class="col-sm-4">
                 <jsp:useBean id="quotes" class="controllers.StaticSymbolsAction" />
 				<jsp:getProperty name="quotes" property="sym" /> 
-           </div>
      </div>
 </div>
 </footer>
