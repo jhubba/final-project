@@ -20,8 +20,8 @@
 		
 		<action name="searchSymbol" class="controllers.SearchAction" method="execute">
 			<result name="found">/index.jsp</result>
+			<result name="null">/index.jsp</result>
 		</action>
 		
  	</package>		 		
  </struts>
-
