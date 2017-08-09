@@ -19,9 +19,7 @@
 		  <input type="password" name="password" placeholder="Password"/>
 		  <button type="submit" value="login">Sign In</button>
 	</form>
-  		  <input type="checkbox" id="rememberMe"/>
-		  <label for="rememberMe"></label><span>I have read and agree to the <a target="_blank" href="terms.jsp">Terms of Use </a>and <a target="_blank" href="privacy.jsp">Privacy Policy</a></span>
-  	<div class="already">Need to sign up? <a href="createaccount.jsp">CreateAccount</a></div>
+    	<div class="already">Need to sign up? <a href="createaccount.jsp">CreateAccount</a></div>
 </div>
 </body>
 </html>
