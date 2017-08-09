@@ -42,11 +42,41 @@
 	
 	<s:set var="cwl" value="watchlistName"></s:set>
 	Current Watch List: <s:property value="cwl"/><br>
-	<s:if test="%{#cwl != null}">
-		<c:forEach items="${getTheQuotes}" var="quote">
-			<c:out value="${quote.symbol}"/> <c:out value="${quote.price}"/> <c:out value="${quote.change}"/><br>
-		</c:forEach>	
-	</s:if>
+<s:if test="%{#cwl != null}">
+	<s:form name="myForm" onsubmit="setRemoveSymbol()">
+    <s:hidden name="removeIndex"/>
+	<table style="border-collapse: separate; border-spacing: 10px;">
+		<tr>
+			<th>Name</th>
+			<th>Symbol</th>
+			<th>Price</th>
+			<th>Change</th>
+			<th>Percent Change</th>
+			<th>Volume</th>
+			<th>Open</th>
+			<th>High</th>
+			<th>Low</th>
+		</tr>
+			<s:iterator value="#session.getTheQuotes" var="symbol" status="status">
+                    <tr>
+                        <td><s:property value="#symbol.name"/></td>
+                        <td><s:property value="#symbol.symbol"/></td>
+                        <td><s:property value="#symbol.price"/></td>
+                        <td><s:property value="#symbol.change"/></td>
+                        <td><s:property value="#symbol.percentChange"/></td>
+                        <td><s:property value="#symbol.volume"/></td>
+                        <td><s:property value="#symbol.open"/></td>
+                        <td><s:property value="#symbol.high"/></td>
+                        <td><s:property value="#symbol.low"/></td>
+                        
+                    </tr>
+            </s:iterator>
+			
+				
+	</table>
+	</s:form>	
+</s:if>
+
 </div>
 
 
