@@ -13,13 +13,13 @@
  			</result>	
  			<result name="loginError">/login.jsp</result>
  		</action>	
- 		
- 		<action name="loadStaticQuotes" class="controllers.StaticSymbolsAction" method="footerQuotes">
-			<result>/index.jsp</result>
-		</action>
 		
 		<action name="loadWatchList" class="controllers.UserProfileAction" method="loadWatchList">
 			<result name="SUCCESS">/userprofile.jsp</result>
+		</action>
+		
+		<action name="searchSymbol" class="controllers.SearchAction" method="execute">
+			<result name="found">/index.jsp</result>
 		</action>
 		
 		<action name="createAccount" class="controllers.CreateAccountAction" method="createAccount">
@@ -28,7 +28,6 @@
 			</result>
 			<result name="FAIL">/createaccount.jsp</result>
 		</action>
-		
  	</package>		 		
  </struts>
 

@@ -45,6 +45,26 @@ public class SQLHelper {
 		return watchLists;
 	}
 	
+		public static int editwatchlist(String watchlist, String watchlistName){
+		
+		java.sql.Connection conn = DatabaseConnectionFactory.getInstance().getDatabaseConnection() ;
+		PreparedStatement st = null;
+		int rs=2;
+		if(conn!=null){
+			try{
+				st = conn.prepareStatement("Update watchlist inner join users on users.uid = watchlist.uid"
+						+ "set stockSym.watchlist = ? where wl_name = ?");	
+				st.setString(1, watchlist);
+				st.setString(2, watchlistName);
+				rs = st.executeUpdate();
+			} catch (SQLException e){
+			}
+		}
+			return rs;
+		
+				
+		}		
+	
 	public static boolean createUser(String username, String password, String firstname, String lastname, String email){
 		java.sql.Connection conn = DatabaseConnectionFactory.getInstance().getDatabaseConnection() ;
 		PreparedStatement st = null;

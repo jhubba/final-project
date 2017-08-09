@@ -18,7 +18,8 @@
 	<url-pattern>/login.jsp</url-pattern>
 	<url-pattern>/login</url-pattern>
 	<url-pattern>/loadWatchList</url-pattern>
-	<url-pattern>/userprofile.jsp</url-pattern>
+	<url-pattern>/userprofile.jsp</url-pattern>	
+	<url-pattern>/searchSymbol</url-pattern>
 	<url-pattern>/createaccount.jsp</url-pattern>	
 	<url-pattern>/createAccount</url-pattern>	
 </filter-mapping>
