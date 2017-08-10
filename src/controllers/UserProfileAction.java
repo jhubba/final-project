@@ -6,6 +6,7 @@ import model.WatchListBean;
 import model.WatchListQuoteHolderBean;
 import model.WatchListsBean;
 import services.SQLHelper;
+import services.WatchListParserService;
 import services.WatchListSymbolHelper;
 
 public class UserProfileAction extends ActionSupport{
@@ -64,13 +65,21 @@ public class UserProfileAction extends ActionSupport{
 	   	ServletActionContext.getRequest().getSession().setAttribute("getTheQuotes", getWlqhb().getWatchListHolder());
 		ServletActionContext.getRequest().getSession().setAttribute("loadWatchList", wlsb.getWatchListName(getWatchlistName()));
 		ServletActionContext.getRequest().getSession().setAttribute("watchlistName", getWatchlistName());
+		ServletActionContext.getRequest().getSession().setAttribute("symbols", getSymbols());
 
 		return "SUCCESS";
 	}
 	
 	public String removeQuoteFromWatchList(){
+
+		String user = ServletActionContext.getRequest().getSession().getAttribute("user").toString();
+		String uwatchlist = ServletActionContext.getRequest().getSession().getAttribute("watchlistName").toString();
+		String rsymbol = getRemoveSymbol();
+		String updateSymbols = ServletActionContext.getRequest().getSession().getAttribute("symbols").toString();
+		String uwl = WatchListParserService.removeSymbol(rsymbol, updateSymbols);
+		SQLHelper.editwatchlist(uwl, uwatchlist, user);
 		
-		
+		ServletActionContext.getRequest().getSession().setAttribute("refreshList", "true");
 		
 		return "REMOVED";
 	}
