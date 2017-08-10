@@ -38,6 +38,59 @@
 </nav>
 
 <div class="container">
+	<div class="row search">
+	    <div class="col-sm-8 col-sm-offset-2">
+	    
+	        <form action="searchSymbolUP" method="post">
+	            <div class="input-group">
+	                <input type="text" id="symbol" name="symbol" class="form-control input-lg" placeholder="Search Symbol...">
+	                <span class="input-group-btn">
+						<button class="btn btn-default btn-lg" type="submit">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+	                </span>
+	            </div>
+	        </form>
+	    </div>
+	</div><br><br>
+	
+	<c:set var="query" value="${query}"/>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="col-md-2"></div>
+			<div class="col-md-5">
+				<span class="queryName"><c:out value="${ query.name }" /></span> 
+				(<c:out value="${ query.exchange }" />:<c:out value="${ query.symbol }" />)
+				<br><span class="lastPrice"><c:out value="${ query.lastPrice }" /></span> 
+				<c:choose>
+					<c:when test="${ query.netChange > 0 }">
+						<span class="positive"><c:out value="${ query.netChange }" /> (<c:out value="${ query.percentChange }" />)</span>
+					</c:when>
+					<c:when test="${ query.netChange < 0 }">
+						<span class="negative"><c:out value="${ query.netChange }" /> (<c:out value="${ query.percentChange }" />)</span>
+					</c:when>
+					<c:otherwise>
+						<span class="neutral"><c:out value="${ query.netChange }" /> (<c:out value="${ query.percentChange }" />)</span>
+					</c:otherwise>
+				</c:choose>
+				<br><span class="details">Quote Time: <c:out value="${ query.tradeTimestamp }" /></span>
+				<br><span class="details"><c:out value="${ query.exchange }" /> real-time data.</span>
+				<br><span class="details">Currency in USD.</span>
+			</div>
+			<div class="col-md-3">
+				<br><span class="moreinfo">Range: <c:out value="${ query.low }" /> - <c:out value="${ query.high }" />
+				<br>52 Week: <c:out value="${ query.fiftyTwoWkLow }" /> - <c:out value="${ query.fiftyTwoWkHigh }" />
+				<br>Open: <c:out value="${ query.open }" />
+				<br>Volume: <c:out value="${ query.volume }" /></span>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+	</div>
+	
+	
+</div>
+
+<div class="container">
 	<c:out value="Welcome: ${session.user}"/> <br>
 	<br>
 	<form action='loadWatchList' method='post'>
@@ -50,41 +103,46 @@
 		</select>
 	</form>
 	
-<s:set var="cwl" value="watchlistName"></s:set>
+<s:set var="cwl" value="watchlistName"/>
+<s:set var="rl" value="refreshList"/>
+<s:set var="getTheQuotes" value="wlqhb.getWatchListHolder()" />
+<s:set var="areTheQuotesEmpty" value="wlqhb" />
 	Current Watch List: <s:property value="cwl"/><br>
 	
-<s:if test="%{#cwl != null}">
-	<s:form name="myForm" onsubmit="setRemoveSymbol()">
-    <s:hidden name="removeSymbol"/>
-	<table style="border-collapse: separate; border-spacing: 10px;">
-		<tr>
-			<th>Name</th>
-			<th>Symbol</th>
-			<th>Price</th>
-			<th>Change</th>
-			<th>Percent Change</th>
-			<th>Volume</th>
-			<th>Open</th>
-			<th>High</th>
-			<th>Low</th>
-		</tr>
-			<s:iterator value="#session.getTheQuotes" var="symbol" status="status">
-                    <tr>
-                        <td><s:property value="#symbol.name"/></td>
-                        <td><s:property value="#symbol.symbol"/></td>
-                        <td><s:property value="#symbol.price"/></td>
-                        <td><s:property value="#symbol.change"/></td>
-                        <td><s:property value="#symbol.percentChange"/></td>
-                        <td><s:property value="#symbol.volume"/></td>
-                        <td><s:property value="#symbol.open"/></td>
-                        <td><s:property value="#symbol.high"/></td>
-                        <td><s:property value="#symbol.low"/></td>
-                        <td><s:submit type="button" value="Remove from WatchList" action="remove" cssClass="" onclick="return setRemoveSymbol('%{#symbol.symbol}')"/>
-                        </td>
-                    </tr>
-            </s:iterator>			
-	</table>
-	</s:form>	
+<s:if test="%{#cwl != null || #rl == true}">
+	<s:if test ="%{#getTheQuotes != null}">
+		<s:form name="myForm" onsubmit="setRemoveSymbol()">
+	    <s:hidden name="removeSymbol"/>
+		<table style="border-collapse: separate; border-spacing: 10px;">
+			<tr>
+				<th>Name</th>
+				<th>Symbol</th>
+				<th>Price</th>
+				<th>Change</th>
+				<th>Percent Change</th>
+				<th>Volume</th>
+				<th>Open</th>
+				<th>High</th>
+				<th>Low</th>
+			</tr>
+				<s:iterator value="%{getTheQuotes}" var="tsymbol" status="status">
+	                    <tr>
+	                        <td><s:property value="#tsymbol.name"/></td>
+	                        <td><s:property value="#tsymbol.symbol"/></td>
+	                        <td><s:property value="#tsymbol.price"/></td>
+	                        <td><s:property value="#tsymbol.change"/></td>
+	                        <td><s:property value="#tsymbol.percentChange"/></td>
+	                        <td><s:property value="#tsymbol.volume"/></td>
+	                        <td><s:property value="#tsymbol.open"/></td>
+	                        <td><s:property value="#tsymbol.high"/></td>
+	                        <td><s:property value="#tsymbol.low"/></td>
+	                        <td><s:submit type="button" value="Remove from WatchList" action="remove" cssClass="" onclick="return setRemoveSymbol('%{#tsymbol.symbol}')"/>
+	                        </td>
+	                    </tr>
+	            </s:iterator>			
+		</table>
+		</s:form>
+	</s:if>	
 </s:if>
 
 </div>
