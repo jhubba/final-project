@@ -12,6 +12,16 @@
 <link href="dashboard.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"> </script>
 <title>Bull-Notes "path of the Bulls"</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript">
+	function setRemoveSymbol(removeSymbol)
+	{
+        document.myForm.action = "removeQuoteFromWatchList.action";    //First set the form to navigate to the specific action
+        $('input[name="removeSymbol"]').val(removeSymbol);
+        document.myForm.submit();                             
+   		return false;                                         
+    }
+</script>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -40,11 +50,12 @@
 		</select>
 	</form>
 	
-	<s:set var="cwl" value="watchlistName"></s:set>
+<s:set var="cwl" value="watchlistName"></s:set>
 	Current Watch List: <s:property value="cwl"/><br>
+	
 <s:if test="%{#cwl != null}">
 	<s:form name="myForm" onsubmit="setRemoveSymbol()">
-    <s:hidden name="removeIndex"/>
+    <s:hidden name="removeSymbol"/>
 	<table style="border-collapse: separate; border-spacing: 10px;">
 		<tr>
 			<th>Name</th>
@@ -68,11 +79,10 @@
                         <td><s:property value="#symbol.open"/></td>
                         <td><s:property value="#symbol.high"/></td>
                         <td><s:property value="#symbol.low"/></td>
-                        
+                        <td><s:submit type="button" value="Remove from WatchList" action="remove" cssClass="" onclick="return setRemoveSymbol('%{#symbol.symbol}')"/>
+                        </td>
                     </tr>
-            </s:iterator>
-			
-				
+            </s:iterator>			
 	</table>
 	</s:form>	
 </s:if>
