@@ -27,6 +27,11 @@
 			<result name="null">/index.jsp</result>
 		</action>
 		
+		<action name="searchSymbolUP" class="controllers.UserProfileAction" method="executeUserProfilePage">
+			<result name="found">/userprofile.jsp</result>
+			<result name="null">/userprofile.jsp</result>
+		</action>
+		
 		<action name="createAccount" class="controllers.CreateAccountAction" method="createAccount">
 			<result name="SUCCESS" type="redirect">
 				<param name ="location">/userprofile.jsp</param>
