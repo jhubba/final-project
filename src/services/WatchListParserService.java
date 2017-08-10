@@ -31,4 +31,24 @@ public class WatchListParserService {
 		sb.deleteCharAt(sb.length() - 1);				
 		return sb.toString();
 	}	
+	
+	public static String removeSymbol(String sym, String watchlist){
+		StringBuilder sb = new StringBuilder();
+		String[] syms = watchlist.split(",");
+
+		for(String s : syms){
+			if(!s.equals(sym)){
+				sb.append(s +",");
+
+			}
+		}
+		sb.deleteCharAt(sb.length() - 1);				
+		return sb.toString();
+	}
+	
+	public static String watchListAdd(String sym, String watchlist){
+		StringBuilder sb = new StringBuilder();
+		sb.append(watchlist + "," + sym);		
+		return sb.toString();
+	}
 }
