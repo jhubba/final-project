@@ -21,7 +21,7 @@ public class SearchAction extends ActionSupport {
 			return "null";
 		}
 	}
-	
+		
 	public Result getQuery() {
 		return query;
 	}
