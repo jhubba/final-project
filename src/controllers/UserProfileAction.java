@@ -15,6 +15,7 @@ public class UserProfileAction extends ActionSupport{
 	private WatchListBean wlb;
 	private String symbols;
 	private WatchListQuoteHolderBean wlqhb;
+	private String removeSymbol;
 	
 	public String getUsername() {
 		return username;
@@ -46,7 +47,12 @@ public class UserProfileAction extends ActionSupport{
 	public void setWlqhb(WatchListQuoteHolderBean wlqhb) {
 		this.wlqhb = wlqhb;
 	}
-
+	public String getRemoveSymbol() {
+		return removeSymbol;
+	}
+	public void setRemoveSymbol(String removeSymbol) {
+		this.removeSymbol = removeSymbol;
+	}
 	public String loadWatchList(){
 		WatchListsBean wlsb = new WatchListsBean();
 		wlsb.setUsername(getUsername());
@@ -57,9 +63,17 @@ public class UserProfileAction extends ActionSupport{
 
 	   	ServletActionContext.getRequest().getSession().setAttribute("getTheQuotes", getWlqhb().getWatchListHolder());
 		ServletActionContext.getRequest().getSession().setAttribute("loadWatchList", wlsb.getWatchListName(getWatchlistName()));
+		ServletActionContext.getRequest().getSession().setAttribute("watchlistName", getWatchlistName());
+
 		return "SUCCESS";
 	}
 	
+	public String removeQuoteFromWatchList(){
+		
+		
+		
+		return "REMOVED";
+	}
 	
 	
 	
