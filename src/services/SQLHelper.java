@@ -113,4 +113,59 @@ public class SQLHelper {
 			}
 			return returnStatus;
 		}
+	
+	private static boolean doesWatchlistNameExist(String watchlistname){
+		
+		java.sql.Connection conn = DatabaseConnectionFactory.getInstance().getDatabaseConnection() ;
+		PreparedStatement st = null;
+		boolean returnStatus = false;
+		
+		if(conn!=null){
+			try{
+				st = conn.prepareStatement("Select wl_name from watchlist where wl_name = ?");	
+				st.setString(1, watchlistname);
+				ResultSet rs = st.executeQuery();
+				if(rs.next()){
+					conn.close();
+					return true;
+				}
+				conn.close();
+					
+			}
+			catch(SQLException e){
+				System.out.println("Error processing watchlistname \n" + e.toString());
+			}
+		}
+		return returnStatus;
+		
+		
+	}
+	
+	public static boolean addWatchlist(String watchlist, String username, String watchlistname){
+		
+		
+		java.sql.Connection conn = DatabaseConnectionFactory.getInstance().getDatabaseConnection() ;
+		PreparedStatement st = null;
+		
+		try{
+			
+			st = conn.prepareStatement("insert into watchlist (wl_name, stockSym, uid ) values (?, ?, (select uid from user where username = ?))");	
+			st.setString(1, watchlistname);
+			st.setString(2, watchlist);
+			st.setString(3, username);
+				
+			if(doesWatchlistNameExist(watchlistname)){
+				conn.close();
+				return false;
+				
+			}
+			st.executeUpdate();
+			conn.close();					
+		}
+		catch(SQLException e){
+			System.out.println("Error processing Create User Nice Try \n" + e.toString());
+		}
+
+		return true;
+	}
 }
