@@ -23,6 +23,7 @@
 	<url-pattern>/createaccount.jsp</url-pattern>	
 	<url-pattern>/createAccount</url-pattern>	
 	<url-pattern>/searchSymbolUP</url-pattern>
+	<url-pattern>/addSymbolToWatchList</url-pattern>
 </filter-mapping>
   
  <welcome-file-list>

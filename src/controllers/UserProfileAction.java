@@ -22,6 +22,7 @@ public class UserProfileAction extends ActionSupport{
 	private boolean refreshList = false;
 	private Result query;
 	private String symbol;
+	private String addSymbol;
 	
 	public String getUsername() {
 		return username;
@@ -86,7 +87,12 @@ public class UserProfileAction extends ActionSupport{
 	public void setRefreshList(boolean refreshList) {
 		this.refreshList = refreshList;
 	}
-	
+	public String getAddSymbol() {
+		return addSymbol;
+	}
+	public void setAddSymbol(String addSymbol) {
+		this.addSymbol = addSymbol;
+	}
 	public String loadWatchList(){		
 		WatchListsBean wlsb = new WatchListsBean();
 		wlsb.setUsername(getUsername());
@@ -146,7 +152,7 @@ public class UserProfileAction extends ActionSupport{
 			ServletActionContext.getRequest().getSession().setAttribute("getTheQuotes", getWlqhb().getWatchListHolder());
 			ServletActionContext.getRequest().getSession().setAttribute("refreshList", "true");
 		}
-						
+		
 		QueryHelper helper = new QueryHelper();
 		try {
 			query = (Result) helper.getSingleQuote(getSymbol());
@@ -156,5 +162,35 @@ public class UserProfileAction extends ActionSupport{
 			e.printStackTrace();
 			return "null";
 		}
-	}	
+	}
+	
+	public String addSymbolToWatchList() {
+		String user = ServletActionContext.getRequest().getSession().getAttribute("user").toString();
+		setWatchlistName(ServletActionContext.getRequest().getSession().getAttribute("watchlistName").toString());
+		String asymbol = getAddSymbol();		
+		String updateSymbols = ServletActionContext.getRequest().getSession().getAttribute("symbols").toString();	
+		setSymbols(WatchListParserService.addSymbol(asymbol, updateSymbols));
+		
+//		/**/
+//		System.out.println("" + asymbol);
+//		System.out.println("New Symbols: " + getSymbols());
+//		/**/
+		SQLHelper.editwatchlist(getSymbols(), getWatchlistName(), user);
+		
+		if(!getSymbols().equals(null) &&  getSymbols().length() > 0){
+			ServletActionContext.getRequest().getSession().setAttribute("symbols", getSymbols());							
+			setWlqhb(WatchListSymbolHelper.getSym(getSymbols()));
+			setRefreshList(true);
+		}else{
+			ServletActionContext.getRequest().getSession().setAttribute("symbols", "");
+		}
+			
+		if(getWlqhb() != null){
+			ServletActionContext.getRequest().getSession().setAttribute("getTheQuotes", getWlqhb().getWatchListHolder());
+			ServletActionContext.getRequest().getSession().setAttribute("refreshList", "true");
+		}
+		
+		return "ADDED";
+	}
+	
 }

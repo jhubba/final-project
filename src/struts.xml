@@ -22,6 +22,10 @@
 			<result name="REMOVED">/userprofile.jsp</result>
 		</action>
 		
+		<action name="addSymbolToWatchList" class="controllers.UserProfileAction" method="addSymbolToWatchList">
+			<result name="ADDED">/userprofile.jsp</result>
+		</action>
+		
 		<action name="searchSymbol" class="controllers.SearchAction" method="execute">
 			<result name="found">/index.jsp</result>
 			<result name="null">/index.jsp</result>
