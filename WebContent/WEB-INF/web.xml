@@ -24,6 +24,8 @@
 	<url-pattern>/createAccount</url-pattern>	
 	<url-pattern>/searchSymbolUP</url-pattern>
 	<url-pattern>/addSymbolToWatchList</url-pattern>
+	<url-pattern>/removeWatchList</url-pattern>
+	<url-pattern>/addWatchList</url-pattern>
 </filter-mapping>
   
  <welcome-file-list>
