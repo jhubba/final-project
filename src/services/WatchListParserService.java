@@ -49,7 +49,7 @@ public class WatchListParserService {
 		return sb.toString();
 	}
 	
-	public static String watchListAdd(String sym, String watchlist){
+	public static String addSymbol(String sym, String watchlist){
 		StringBuilder sb = new StringBuilder();
 		sb.append(watchlist + "," + sym);		
 		return sb.toString();
