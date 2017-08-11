@@ -134,7 +134,7 @@ public class UserProfileAction extends ActionSupport{
 			ServletActionContext.getRequest().getSession().setAttribute("getTheQuotes", getWlqhb().getWatchListHolder());
 			ServletActionContext.getRequest().getSession().setAttribute("refreshList", "true");
 		}
-			
+		
 		return "REMOVED";
 	}
 
@@ -152,7 +152,7 @@ public class UserProfileAction extends ActionSupport{
 			ServletActionContext.getRequest().getSession().setAttribute("getTheQuotes", getWlqhb().getWatchListHolder());
 			ServletActionContext.getRequest().getSession().setAttribute("refreshList", "true");
 		}
-		
+			
 		QueryHelper helper = new QueryHelper();
 		try {
 			query = (Result) helper.getSingleQuote(getSymbol());
@@ -165,6 +165,7 @@ public class UserProfileAction extends ActionSupport{
 	}
 	
 	public String addSymbolToWatchList() {
+		//setAddSymbol("VDE");
 		String user = ServletActionContext.getRequest().getSession().getAttribute("user").toString();
 		setWatchlistName(ServletActionContext.getRequest().getSession().getAttribute("watchlistName").toString());
 		String asymbol = getAddSymbol();		
@@ -192,5 +193,28 @@ public class UserProfileAction extends ActionSupport{
 		
 		return "ADDED";
 	}
+	
+	public String removeWatchList() {
+		String user = ServletActionContext.getRequest().getSession().getAttribute("user").toString();
+		setWatchlistName(ServletActionContext.getRequest().getSession().getAttribute("watchlistName").toString());
+		SQLHelper.removeWatchlist(user, getWatchlistName());
+		
+		ServletActionContext.getRequest().getSession().setAttribute("refreshList", "false");		
+		
+		return "REMOVEDWATCHLIST";
+	}
+
+	public String addWatchList() {
+		String user = ServletActionContext.getRequest().getSession().getAttribute("user").toString();
+		setWatchlistName(ServletActionContext.getRequest().getSession().getAttribute("watchlistName").toString());
+		if(SQLHelper.addWatchlist("", user, getWatchlistName())){
+			ServletActionContext.getRequest().getSession().setAttribute("refreshList", "false");
+		}
+		
+				
+		
+		return "ADDEDWATCHLIST";
+	}
+	
 	
 }
