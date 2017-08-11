@@ -20,7 +20,7 @@ body {
 .bottom-footer .container-fluid
 {
 	position: relative;
-	top: 50%;
+	top: 30%;
 }
 
 .bottom-footer .container-fluid .row .col-sm-4 
@@ -28,8 +28,20 @@ body {
 	text-align: center;
 }
 
-.prices {
-	background-color:white;
+.label .label-default{
+	font-size: 16px;
+}
+.prices{
+	background-color:#777777;
+	color: white;  
+}
+
+.changenegative{
+	background-color:#777777;
+	color: #FF6565;
+}
+.changepositive{
+	color:#AFFF95;
 }
 .quotes {
 	background-color:white;
@@ -65,3 +77,5 @@ body {
 .moreinfo {
 	font-size: 1.2em;
 }
+
+

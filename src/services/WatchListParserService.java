@@ -5,8 +5,7 @@ import model.WatchListBean;
 public class WatchListParserService {
 	private static final Object instance = new Object();
 	
-	protected WatchListParserService (){
-		
+	protected WatchListParserService (){		
 	}
 	public static Object getInstance(){
 		return instance;
@@ -25,10 +24,34 @@ public class WatchListParserService {
 		for(String s : syms){
 			if(!s.equals(sym)){
 				sb.append(s +",");
-
 			}
 		}
-		sb.deleteCharAt(sb.length() - 1);				
+		if(sb.length() > 0){
+			sb.deleteCharAt(sb.length() - 1);
+		}
+						
 		return sb.toString();
 	}	
+	
+	public static String removeSymbol(String sym, String watchlist){
+		StringBuilder sb = new StringBuilder();
+		String[] syms = watchlist.split(",");
+
+		for(String s : syms){
+			s = s.trim();
+			if(!s.equals(sym)){
+				sb.append(s +",");
+			}
+		}
+		if(sb.length() > 0){
+			sb.deleteCharAt(sb.length() - 1);
+		}			
+		return sb.toString();
+	}
+	
+	public static String watchListAdd(String sym, String watchlist){
+		StringBuilder sb = new StringBuilder();
+		sb.append(watchlist + "," + sym);		
+		return sb.toString();
+	}
 }

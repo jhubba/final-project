@@ -15,9 +15,9 @@
 </head>
 <body>
 <div class="content">
-	<div class="title">CreateAccount</div>
+	<div class="title">Create Account</div>
 	<h3><s:actionerror /></h3>
-	<form action="createAccount" class="createA" method="post">
+	<form action="createAccount" method="post">
 	<ul>
 	<li>
 		<input type="text" name="firstname" class="fname split" placeholder="First Name"/>
@@ -38,6 +38,9 @@
 	</li>
 	</ul>
 	</form>
+	<input type="checkbox" id="rememberMe"/>
+	<label for="rememberMe"></label><span>I have read and agree to the <a target="_blank" href="terms.jsp">Terms of Use </a>and <a target="_blank" href="privacy.jsp">Privacy Policy</a></span>
+	<div class="already"><a href="login.jsp">Return back to Login</a></div>
 </div>	
 </body>
 </html>

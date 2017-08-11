@@ -70,7 +70,7 @@ body {
 
 .content input {
   width: 99%;
-  font-size: 1.2rem;
+  font-size: 18px;
   font-family: "Open Sans";
   margin: 10px 0px;
   border: none;
@@ -82,7 +82,7 @@ body {
 
 .content .split{
   width: 49%;
-  font-size: 1.2rem;
+  font-size: 18px;
   font-family: "Open Sans";
   margin: 10px 0px;
   border: none;
@@ -91,7 +91,9 @@ body {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-
+.content ul{
+	padding-left: 0px;
+}
 .content ul li .split{
     width: 49%;
 }
@@ -108,11 +110,14 @@ body {
     float:none;
 }
 
-
+a {
+  color: #BBB !important;
+}
 
 .content button {
   width: 99%;
-  font-size: 1.1rem;
+  font-size: 18px;
+  font-family: "Open Sans";
   padding: 10px;
   margin: 20px 0px;
   background-color: #66A756;
@@ -123,7 +128,49 @@ body {
   border-radius: 4px;
 }
 
+.content input[type=checkbox] {
+  display: none;
+}
+.content label {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  position: relative;
+  margin-left: 5px;
+  margin-right: 10px;
+  top: 5px;
+}
+.content label:before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  position: absolute;
+  left: 0;
+  bottom: 1px;
+  background-color: #aaa;
+  -moz-box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.8);
+  -webkit-box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.8);
+}
+.content input[type=checkbox]:checked + label:before {
+  content: "\2713";
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  line-height: 20px;
+}
+
+.content span {
+  color: white;
+}
+
 .content .already {
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 12px;
 }
