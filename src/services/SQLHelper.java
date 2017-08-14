@@ -112,5 +112,90 @@ public class SQLHelper {
 				}
 			}
 			return returnStatus;
+	}
+	
+private static boolean doesWatchlistNameExist(String watchlistname){
+		
+		java.sql.Connection conn = DatabaseConnectionFactory.getInstance().getDatabaseConnection() ;
+		PreparedStatement st = null;
+		boolean returnStatus = false;
+		
+		if(conn!=null){
+			try{
+				st = conn.prepareStatement("Select wl_name from watchlist where wl_name = ?");	
+				st.setString(1, watchlistname);
+				ResultSet rs = st.executeQuery();
+				if(rs.next()){
+					conn.close();
+					return true;
+				}
+				conn.close();
+					
+			}
+			catch(SQLException e){
+				System.out.println("Error processing watchlistname \n" + e.toString());
+			}
 		}
+		return returnStatus;
+		
+		
+	}
+	
+	public static boolean addWatchlist(String watchlist, String username, String watchlistname){
+		
+		
+		java.sql.Connection conn = DatabaseConnectionFactory.getInstance().getDatabaseConnection() ;
+		PreparedStatement st = null;
+		
+		try{
+			
+			st = conn.prepareStatement("insert into watchlist (wl_name, stockSym, uid ) values (?, ?, (select uid from users where username = ?))");	
+			st.setString(1, watchlistname);
+			st.setString(2, watchlist);
+			st.setString(3, username);
+				
+			if(doesWatchlistNameExist(watchlistname)){
+				conn.close();
+				return false;
+				
+			}else{
+				st.executeUpdate();
+			}			
+			conn.close();					
+		}
+		catch(SQLException e){
+			System.out.println("Error processing Create User Nice Try \n" + e.toString());
+		}
+
+		return true;
+	}
+	
+	public static void removeWatchlist(String username, String watchlistname){
+			
+			
+			java.sql.Connection conn = DatabaseConnectionFactory.getInstance().getDatabaseConnection() ;
+			PreparedStatement st = null;
+			
+			try{
+				st = conn.prepareStatement("select WID from watchlist w inner join users u where u.username = ? and w.wl_name = ?");
+				st.setString(1, username);
+				st.setString(2, watchlistname);
+				ResultSet r = st.executeQuery();
+				int wlid = -1;
+				
+				while(r.next()){
+					wlid = r.getInt("WID");
+				}
+				
+				if(wlid != -1){
+					st = conn.prepareStatement("delete from watchlist where WID = ?");	
+					st.setInt(1, wlid);
+					st.executeUpdate();
+				}				
+				conn.close();					
+			}
+			catch(SQLException e){
+				System.out.println("Error processing removeWatchlist Nice Try \n" + e.toString());
+			}
+	}
 }
