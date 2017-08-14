@@ -27,6 +27,7 @@
 	<url-pattern>/removeWatchList</url-pattern>
 	<url-pattern>/addWatchList</url-pattern>
 	<url-pattern>/logout.jsp</url-pattern>
+	<url-pattern>/logout</url-pattern>
 </filter-mapping>
   
  <welcome-file-list>
