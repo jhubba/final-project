@@ -96,7 +96,7 @@
 			</div>
 			<div class="col-md-2">
 				<form action="addSymbolToWatchList" method="post">
-					<c:out value="ADD: " /><br><input type="submit" name="addSymbol" value="${query.symbol}"/> 
+					<c:out value="ADD CW:" /><br><input type="submit" name="addSymbol" value="${query.symbol}"/> 
 		        </form>
 			</div>
 		</div>
@@ -117,10 +117,13 @@
 			</c:forEach>	
 		</select>
 	</form>
-	
-
-	
+		
 <s:if test="%{#cwl != null || #rl == true}">
+
+	<form action="removeWatchList" method="post">
+		<c:out value="Remove WatchList: " /><input type="submit" name="watchlistName" value="${cwl}"/> 
+	</form>
+
 	<s:if test ="%{#getTheQuotes != null}">
 		<s:form name="myForm" onsubmit="setRemoveSymbol()">
 	    <s:hidden name="removeSymbol"/>
@@ -157,7 +160,6 @@
 </s:if>
 
 </div>
-
 
 <footer class="bottom-footer">
 <div class="container-fluid">
