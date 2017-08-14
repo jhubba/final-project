@@ -40,6 +40,7 @@
   </div>
 </nav>
 
+<c:out value="Welcome: ${session.user}"/> <br>
 <s:actionerror />
 	<form action="addWatchList" method="post">
 		  <input type="text" name="watchlistName" placeholder="Create a new Watchlist"/>
@@ -94,18 +95,22 @@
 				<br>Volume: <c:out value="${ query.volume }" /></span>
 			</div>
 			<div class="col-md-2">
-				<form action="addSymbol" method="post">
-					<input type="submit" value="Add To Watchlist" />
+				<form action="addSymbolToWatchList" method="post">
+					<c:out value="ADD: " /><br><input type="submit" name="addSymbol" value="${query.symbol}"/> 
 		        </form>
 			</div>
 		</div>
 	</div>
 </div>
 
+<s:set var="cwl" value="watchlistName"/>
+<s:set var="rl" value="refreshList"/>
+<s:set var="getTheQuotes" value="wlqhb.getWatchListHolder()" />
+<s:set var="areTheQuotesEmpty" value="wlqhb" />
+	
 <div class="container">
 	<form action='loadWatchList' method='post'>
-		<h3>Select a WatchList </h3>
-		<select name='watchlistName' id="watchlist" onchange="this.form.submit()">
+		<c:out value="Current WatchList: "/><s:property value="cwl"/><c:out value="     "/><select name='watchlistName' id="watchlist" onchange="this.form.submit()">
 			<option value="default" selected>Select a watch list</option>
 			<c:forEach items="${session.watchLists.getWatchlists()}" var="item">
 				<option value="${item.getWatchListName().toString()}">${item.getWatchListName()}</option>	
@@ -113,11 +118,7 @@
 		</select>
 	</form>
 	
-<s:set var="cwl" value="watchlistName"/>
-<s:set var="rl" value="refreshList"/>
-<s:set var="getTheQuotes" value="wlqhb.getWatchListHolder()" />
-<s:set var="areTheQuotesEmpty" value="wlqhb" />
-	Current Watch List: <s:property value="cwl"/><br>
+
 	
 <s:if test="%{#cwl != null || #rl == true}">
 	<s:if test ="%{#getTheQuotes != null}">
