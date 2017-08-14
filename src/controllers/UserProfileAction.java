@@ -216,9 +216,10 @@ public class UserProfileAction extends ActionSupport{
 	
 	public String removeWatchList() {
 		String user = ServletActionContext.getRequest().getSession().getAttribute("user").toString();
-		setWatchlistName(ServletActionContext.getRequest().getSession().getAttribute("watchlistName").toString());
 		SQLHelper.removeWatchlist(user, getWatchlistName());
 		
+		setWatchlistName(null);
+		ServletActionContext.getRequest().getSession().setAttribute("watchlistName", null);
 		ServletActionContext.getRequest().getSession().setAttribute("refreshList", "false");		
 		
 		return "REMOVEDWATCHLIST";
@@ -232,7 +233,8 @@ public class UserProfileAction extends ActionSupport{
 	    	   WatchListsBean wb = new WatchListsBean();
 	    	   wb.setUsername(getUsername());
 	    	   wb.setWatchlists(SQLHelper.getUserWatchLists(getUsername()));
-	    	   ServletActionContext.getRequest().getSession().setAttribute("watchLists", wb); 
+	    	   ServletActionContext.getRequest().getSession().setAttribute("watchLists", wb);
+	    	   ServletActionContext.getRequest().getSession().setAttribute("watchlistName", getWatchlistName());
 	    	   
 		}else{
 			ServletActionContext.getRequest().getSession().setAttribute("refreshList", "false");
