@@ -46,9 +46,4 @@ public class LoginAction extends ActionSupport{
            return "loginError";
        }
 	}
-	
-	public String logout(){  
-	    sessionmap.invalidate();  
-	    return "success";  
-	}  
 }
