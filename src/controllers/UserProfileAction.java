@@ -203,16 +203,24 @@ public class UserProfileAction extends ActionSupport{
 		
 		return "REMOVEDWATCHLIST";
 	}
-
+	
 	public String addWatchList() {
 		String user = ServletActionContext.getRequest().getSession().getAttribute("user").toString();
-		setWatchlistName(ServletActionContext.getRequest().getSession().getAttribute("watchlistName").toString());
+		//setWatchlistName(ServletActionContext.getRequest().getSession().getAttribute("watchlistName").toString());
+		
+		System.out.println("" + getWatchlistName());
 		if(SQLHelper.addWatchlist("", user, getWatchlistName())){
+			loadWatchList();
+		}else{
 			ServletActionContext.getRequest().getSession().setAttribute("refreshList", "false");
+			String message= getText("Error: WatchList may already exist");    
+	        addActionError(message);       
+	        return "ERRORADDWATCHLIST";
 		}
 			
 		return "ADDEDWATCHLIST";
 	}
+
 	
 	
 }
