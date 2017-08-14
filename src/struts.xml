@@ -38,5 +38,9 @@
 			</result>
 			<result name="FAIL">/createaccount.jsp</result>
 		</action>
+		
+		<action name="logout" class="LogoutAction" method="logout">  
+			<result name="success" >/login.jsp</result>  
+		</action>  
  	</package>		 		
  </struts>
