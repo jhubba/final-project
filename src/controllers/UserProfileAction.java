@@ -99,7 +99,8 @@ public class UserProfileAction extends ActionSupport{
  	   	wlsb.setWatchlists(SQLHelper.getUserWatchLists(getUsername())); 
  	   	setWlb(wlsb.getWatchListName(getWatchlistName()));   	
  	   	setSymbols(getWlb().getWatchlist());
- 	   	
+   		ServletActionContext.getRequest().getSession().setAttribute("watchlistName", getWatchlistName());
+   		
  	   	if(!getSymbols().equals(null) && getSymbols().length() > 0){
  	   		setWlqhb(WatchListSymbolHelper.getSym(getSymbols()));
  	   	}
@@ -107,7 +108,6 @@ public class UserProfileAction extends ActionSupport{
 	   	if( getWlqhb() != null){
 	   		ServletActionContext.getRequest().getSession().setAttribute("getTheQuotes", getWlqhb().getWatchListHolder());
 	   		ServletActionContext.getRequest().getSession().setAttribute("loadWatchList", wlsb.getWatchListName(getWatchlistName()));
-	   		ServletActionContext.getRequest().getSession().setAttribute("watchlistName", getWatchlistName());
 	   		ServletActionContext.getRequest().getSession().setAttribute("symbols", getSymbols());
 	   	}
  	   	
@@ -171,26 +171,46 @@ public class UserProfileAction extends ActionSupport{
 	}
 	
 	public String addSymbolToWatchList() {
-		String user = ServletActionContext.getRequest().getSession().getAttribute("user").toString();
-		setWatchlistName(ServletActionContext.getRequest().getSession().getAttribute("watchlistName").toString());
-		String asymbol = getAddSymbol();		
-		String updateSymbols = ServletActionContext.getRequest().getSession().getAttribute("symbols").toString();	
-		setSymbols(WatchListParserService.addSymbol(asymbol, updateSymbols));
-		SQLHelper.editwatchlist(getSymbols(), getWatchlistName(), user);
-		
-		if(!getSymbols().equals(null) &&  getSymbols().length() > 0){
-			ServletActionContext.getRequest().getSession().setAttribute("symbols", getSymbols());							
-			setWlqhb(WatchListSymbolHelper.getSym(getSymbols()));
-			setRefreshList(true);
-		}else{
-			ServletActionContext.getRequest().getSession().setAttribute("symbols", "");
-		}
+		if(ServletActionContext.getRequest().getSession().getAttribute("watchlistName") != null){
+			setWatchlistName(ServletActionContext.getRequest().getSession().getAttribute("watchlistName").toString());
+			WatchListsBean wlsb = new WatchListsBean();
+			wlsb.setUsername(getUsername());
+	 	   	wlsb.setWatchlists(SQLHelper.getUserWatchLists(getUsername())); 
+	 	   	
+	 	   	for(WatchListBean wb : wlsb.getWatchlists()){
+	 	   		if(wb.getWatchListName().equals(getWatchlistName())){
+	 	   			setSymbols(wb.getWatchlist());
+	 	   		}
+	 	   	}
+	 	   	
+	 	   	setWlb(wlsb.getWatchListName(getWatchlistName()));
+	 	   	boolean proceedWithAdd = true;
+	 	   	String[] checkSymbols = getSymbols().split(",");
+	 	   	if(checkSymbols.length < 20){
+	 	   		for(String s: checkSymbols){
+		 	   		if(s.equals(getAddSymbol())){
+		 	   			proceedWithAdd = false;
+		 	   		}
+	 	   		}
+		 	   	if(proceedWithAdd){
+		 	   		setSymbols(WatchListParserService.addSymbol(getAddSymbol(), getSymbols()));
+		 	   		SQLHelper.editwatchlist(getSymbols(), getWatchlistName(), getUsername());
+		 	   	}
+	 	   	}
 			
-		if(getWlqhb() != null){
-			ServletActionContext.getRequest().getSession().setAttribute("getTheQuotes", getWlqhb().getWatchListHolder());
-			ServletActionContext.getRequest().getSession().setAttribute("refreshList", "true");
+			if(!getSymbols().equals(null) &&  getSymbols().length() > 0){
+				ServletActionContext.getRequest().getSession().setAttribute("symbols", getSymbols());							
+				setWlqhb(WatchListSymbolHelper.getSym(getSymbols()));
+				setRefreshList(true);
+			}else{
+				ServletActionContext.getRequest().getSession().setAttribute("symbols", "");
+			}
+				
+			if(getWlqhb() != null){
+				ServletActionContext.getRequest().getSession().setAttribute("getTheQuotes", getWlqhb().getWatchListHolder());
+				ServletActionContext.getRequest().getSession().setAttribute("refreshList", "true");
+			}
 		}
-		
 		return "ADDED";
 	}
 	
@@ -206,15 +226,24 @@ public class UserProfileAction extends ActionSupport{
 	
 	public String addWatchList() {
 		String user = ServletActionContext.getRequest().getSession().getAttribute("user").toString();
-		//setWatchlistName(ServletActionContext.getRequest().getSession().getAttribute("watchlistName").toString());
+		setWatchlistName(getWatchlistName().trim());
 		
-		System.out.println("" + getWatchlistName());
-		if(SQLHelper.addWatchlist("", user, getWatchlistName())){
-			loadWatchList();
+		if(!(getWatchlistName().isEmpty()) && SQLHelper.addWatchlist("", user, getWatchlistName())){
+	    	   WatchListsBean wb = new WatchListsBean();
+	    	   wb.setUsername(getUsername());
+	    	   wb.setWatchlists(SQLHelper.getUserWatchLists(getUsername()));
+	    	   ServletActionContext.getRequest().getSession().setAttribute("watchLists", wb); 
+	    	   
 		}else{
 			ServletActionContext.getRequest().getSession().setAttribute("refreshList", "false");
-			String message= getText("Error: WatchList may already exist");    
-	        addActionError(message);       
+			String message= getText("WatchList may already exist or name not entered");    
+	        addActionError(message); 
+	        
+	        if(!getWatchlistName().isEmpty()){
+	        	ServletActionContext.getRequest().getSession().setAttribute("refreshList", "true");
+	        	loadWatchList();
+	        }
+	        
 	        return "ERRORADDWATCHLIST";
 		}
 			
