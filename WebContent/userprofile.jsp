@@ -35,7 +35,7 @@
       <li class="active"><a href="/Bull-Notes/userprofile.jsp">Watchlist</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="/Bull-Notes/logout.jsp"><span class="glyphicon glyphicon-log-out"></span> Login</a></li>
+      <li><a href="/Bull-Notes/logout.jsp"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
