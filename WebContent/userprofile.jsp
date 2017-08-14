@@ -40,6 +40,13 @@
   </div>
 </nav>
 
+<s:actionerror />
+	<form action="addWatchList" method="post">
+		  <input type="text" name="watchlistName" placeholder="Create a new Watchlist"/>
+		  <button type="submit" value="addWatchList">Create New WatchList</button>
+	</form>
+		
+
 <div class="container">
 	<div class="row search">
 	    <div class="col-sm-8 col-sm-offset-2">
@@ -96,8 +103,6 @@
 </div>
 
 <div class="container">
-	<c:out value="Welcome: ${session.user}"/> <br>
-	<br>
 	<form action='loadWatchList' method='post'>
 		<h3>Select a WatchList </h3>
 		<select name='watchlistName' id="watchlist" onchange="this.form.submit()">
