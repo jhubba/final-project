@@ -34,6 +34,9 @@
       <!-- <li><a href="#">Dashboard</a></li> -->
       <li class="active"><a href="/Bull-Notes/userprofile.jsp">Watchlist</a></li>
     </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/Bull-Notes/login.jsp"><span class="glyphicon glyphicon-log-out"></span> Login</a></li>
+    </ul>
   </div>
 </nav>
 
@@ -83,11 +86,13 @@
 				<br>Open: <c:out value="${ query.open }" />
 				<br>Volume: <c:out value="${ query.volume }" /></span>
 			</div>
-			<div class="col-md-2"></div>
+			<div class="col-md-2">
+				<form action="addSymbol" method="post">
+					<input type="submit" value="Add To Watchlist" />
+		        </form>
+			</div>
 		</div>
 	</div>
-	
-	
 </div>
 
 <div class="container">
@@ -125,21 +130,21 @@
 				<th>High</th>
 				<th>Low</th>
 			</tr>
-				<s:iterator value="%{getTheQuotes}" var="tsymbol" status="status">
-	                    <tr>
-	                        <td><s:property value="#tsymbol.name"/></td>
-	                        <td><s:property value="#tsymbol.symbol"/></td>
-	                        <td><s:property value="#tsymbol.price"/></td>
-	                        <td><s:property value="#tsymbol.change"/></td>
-	                        <td><s:property value="#tsymbol.percentChange"/></td>
-	                        <td><s:property value="#tsymbol.volume"/></td>
-	                        <td><s:property value="#tsymbol.open"/></td>
-	                        <td><s:property value="#tsymbol.high"/></td>
-	                        <td><s:property value="#tsymbol.low"/></td>
-	                        <td><s:submit type="button" value="Remove from WatchList" action="remove" cssClass="" onclick="return setRemoveSymbol('%{#tsymbol.symbol}')"/>
-	                        </td>
-	                    </tr>
-	            </s:iterator>			
+			<s:iterator value="%{getTheQuotes}" var="tsymbol" status="status">
+            <tr>
+                <td><s:property value="#tsymbol.name"/></td>
+                <td><s:property value="#tsymbol.symbol"/></td>
+                <td><s:property value="#tsymbol.price"/></td>
+                <td><s:property value="#tsymbol.change"/></td>
+                <td><s:property value="#tsymbol.percentChange"/></td>
+                <td><s:property value="#tsymbol.volume"/></td>
+                <td><s:property value="#tsymbol.open"/></td>
+                <td><s:property value="#tsymbol.high"/></td>
+                <td><s:property value="#tsymbol.low"/></td>
+                <td><s:submit type="button" value="Remove from WatchList" action="remove" cssClass="" onclick="return setRemoveSymbol('%{#tsymbol.symbol}')"/>
+                </td>
+            </tr>
+            </s:iterator>			
 		</table>
 		</s:form>
 	</s:if>	
