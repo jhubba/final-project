@@ -44,6 +44,7 @@
 	</div><br><br>
 	
 	<c:set var="query" value="${query}"/>
+	<c:if test="${ not empty query }">
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<div class="col-md-2"></div>
@@ -75,6 +76,7 @@
 			<div class="col-md-2"></div>
 		</div>
 	</div>
+	</c:if>
 	
 	
 </div>
