@@ -11,15 +11,15 @@ public class WatchListParserService {
 		return instance;
 	}
 	
-	public static String watchListAdd(String sym, WatchListBean watchlist){
+	public static String watchListAdd(String sym, WatchListBean watchList){
 		StringBuilder sb = new StringBuilder();
-		sb.append(watchlist.getWatchlist() + "," + sym);		
+		sb.append(watchList.getWatchlist() + "," + sym);		
 		return sb.toString();
 	}
 	
-	public static String watchListRemove(String sym, WatchListBean watchlist){
+	public static String watchListRemove(String sym, WatchListBean watchList){
 		StringBuilder sb = new StringBuilder();
-		String[] syms = watchlist.getWatchlist().split(",");
+		String[] syms = watchList.getWatchlist().split(",");
 
 		for(String s : syms){
 			if(!s.equals(sym)){
@@ -33,9 +33,9 @@ public class WatchListParserService {
 		return sb.toString();
 	}	
 	
-	public static String removeSymbol(String sym, String watchlist){
+	public static String removeSymbol(String sym, String watchList){
 		StringBuilder sb = new StringBuilder();
-		String[] syms = watchlist.split(",");
+		String[] syms = watchList.split(",");
 
 		for(String s : syms){
 			s = s.trim();
@@ -49,9 +49,13 @@ public class WatchListParserService {
 		return sb.toString();
 	}
 	
-	public static String addSymbol(String sym, String watchlist){
+	public static String addSymbol(String sym, String watchList){
 		StringBuilder sb = new StringBuilder();
-		sb.append(watchlist + "," + sym);		
+		if(watchList.length() != 0){
+			sb.append(watchList + "," + sym);
+		}else{
+			sb.append(sym);
+		}			
 		return sb.toString();
 	}
 }

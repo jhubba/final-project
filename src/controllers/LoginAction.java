@@ -27,26 +27,23 @@ public class LoginAction extends ActionSupport{
 	}
 	
 	@Override
-	public String execute(){
-		   
-	       if (getUsername().equals("") || getPassword().equals("")) {
-	    	   String message= "Dont leave the Username/Password blank";      
-	           addActionError(message);
-	           return "loginError";
-	       }
-	       else if (UserAuthenticationService.isValidUser(getUsername(), getPassword())) {
-	    	   ServletActionContext.getRequest().getSession().setAttribute("user", getUsername());
-	    	   ServletActionContext.getRequest().getSession().setAttribute("loginTime", new Date());
-	    	   WatchListsBean wb = new WatchListsBean();
-	    	   wb.setUsername(getUsername());
-	    	   wb.setWatchlists(SQLHelper.getUserWatchLists(getUsername()));
-	    	   ServletActionContext.getRequest().getSession().setAttribute("watchLists", wb); 
-	           return "loginSuccess";
-	       }
-	       else {
-	           String message= getText("error.login");    
-	           addActionError(message);       
-	           return "loginError";
-	       }
+	public String execute(){		   
+       if (getUsername().equals("") || getPassword().equals("")) {
+    	   String message= "Dont leave the Username/Password blank";      
+           addActionError(message);
+           return "loginError";
+       } else if (UserAuthenticationService.isValidUser(getUsername(), getPassword())) {
+    	   ServletActionContext.getRequest().getSession().setAttribute("user", getUsername());
+    	   ServletActionContext.getRequest().getSession().setAttribute("loginTime", new Date());
+    	   WatchListsBean wb = new WatchListsBean();
+    	   wb.setUsername(getUsername());
+    	   wb.setWatchlists(SQLHelper.getUserWatchLists(getUsername()));
+    	   ServletActionContext.getRequest().getSession().setAttribute("watchLists", wb); 
+           return "loginSuccess";
+       } else {
+           String message= getText("error.login");    
+           addActionError(message);       
+           return "loginError";
+       }
 	}
 }

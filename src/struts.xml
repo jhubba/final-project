@@ -32,16 +32,17 @@
 		
 		<action name="addWatchList" class="controllers.UserProfileAction" method="addWatchList">
 			<result name="ADDEDWATCHLIST">/userprofile.jsp</result>
+			<result name="ERRORADDWATCHLIST">/userprofile.jsp</result>
+		</action>
+					
+		<action name="searchSymbolUP" class="controllers.UserProfileAction" method="executeUserProfilePage">
+			<result name="found">/userprofile.jsp</result>
+			<result name="null">/userprofile.jsp</result>
 		</action>
 		
 		<action name="searchSymbol" class="controllers.SearchAction" method="execute">
 			<result name="found">/index.jsp</result>
 			<result name="null">/index.jsp</result>
-		</action>
-		
-		<action name="searchSymbolUP" class="controllers.UserProfileAction" method="executeUserProfilePage">
-			<result name="found">/userprofile.jsp</result>
-			<result name="null">/userprofile.jsp</result>
 		</action>
 		
 		<action name="createAccount" class="controllers.CreateAccountAction" method="createAccount">
@@ -50,5 +51,9 @@
 			</result>
 			<result name="FAIL">/createaccount.jsp</result>
 		</action>
+		
+		<action name="logout" class="controllers.LogoutAction" method="execute">  
+			<result name="logoutSuccess" >/logout.jsp</result>  
+		</action>  
  	</package>		 		
  </struts>

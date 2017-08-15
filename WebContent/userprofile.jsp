@@ -34,8 +34,19 @@
       <!-- <li><a href="#">Dashboard</a></li> -->
       <li class="active"><a href="/Bull-Notes/userprofile.jsp">Watchlist</a></li>
     </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/Bull-Notes/logout.jsp"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
   </div>
 </nav>
+
+<c:out value="Welcome: ${session.user}"/> <br>
+<s:actionerror />
+	<form action="addWatchList" method="post">
+		  <input type="text" name="watchlistName" placeholder="Create a new Watchlist"/>
+		  <button type="submit" value="addWatchList">Create New WatchList</button>
+	</form>
+		
 
 <div class="container">
 	<div class="row search">
@@ -83,33 +94,36 @@
 				<br>Open: <c:out value="${ query.open }" />
 				<br>Volume: <c:out value="${ query.volume }" /></span>
 			</div>
-			<div class="col-md-2"></div>
+			<div class="col-md-2">
+				<form action="addSymbolToWatchList" method="post">
+					<c:out value="ADD CW:" /><br><input type="submit" name="addSymbol" value="${query.symbol}"/> 
+		        </form>
+			</div>
 		</div>
 	</div>
-	
-	
 </div>
 
+<s:set var="cwl" value="watchlistName"/>
+<s:set var="rl" value="refreshList"/>
+<s:set var="getTheQuotes" value="wlqhb.getWatchListHolder()" />
+<s:set var="areTheQuotesEmpty" value="wlqhb" />
+	
 <div class="container">
-	<c:out value="Welcome: ${session.user}"/> <br>
-	<br>
 	<form action='loadWatchList' method='post'>
-		<h3>Select a WatchList </h3>
-		<select name='watchlistName' id="watchlist" onchange="this.form.submit()">
+		<c:out value="Current WatchList: "/><s:property value="cwl"/><c:out value="     "/><select name='watchlistName' id="watchlist" onchange="this.form.submit()">
 			<option value="default" selected>Select a watch list</option>
 			<c:forEach items="${session.watchLists.getWatchlists()}" var="item">
 				<option value="${item.getWatchListName().toString()}">${item.getWatchListName()}</option>	
 			</c:forEach>	
 		</select>
 	</form>
-	
-<s:set var="cwl" value="watchlistName"/>
-<s:set var="rl" value="refreshList"/>
-<s:set var="getTheQuotes" value="wlqhb.getWatchListHolder()" />
-<s:set var="areTheQuotesEmpty" value="wlqhb" />
-	Current Watch List: <s:property value="cwl"/><br>
-	
+		
 <s:if test="%{#cwl != null || #rl == true}">
+
+	<form action="removeWatchList" method="post">
+		<c:out value="Remove WatchList: " /><input type="submit" name="watchlistName" value="${cwl}"/> 
+	</form>
+
 	<s:if test ="%{#getTheQuotes != null}">
 		<s:form name="myForm" onsubmit="setRemoveSymbol()">
 	    <s:hidden name="removeSymbol"/>
@@ -125,28 +139,27 @@
 				<th>High</th>
 				<th>Low</th>
 			</tr>
-				<s:iterator value="%{getTheQuotes}" var="tsymbol" status="status">
-	                    <tr>
-	                        <td><s:property value="#tsymbol.name"/></td>
-	                        <td><s:property value="#tsymbol.symbol"/></td>
-	                        <td><s:property value="#tsymbol.price"/></td>
-	                        <td><s:property value="#tsymbol.change"/></td>
-	                        <td><s:property value="#tsymbol.percentChange"/></td>
-	                        <td><s:property value="#tsymbol.volume"/></td>
-	                        <td><s:property value="#tsymbol.open"/></td>
-	                        <td><s:property value="#tsymbol.high"/></td>
-	                        <td><s:property value="#tsymbol.low"/></td>
-	                        <td><s:submit type="button" value="Remove from WatchList" action="remove" cssClass="" onclick="return setRemoveSymbol('%{#tsymbol.symbol}')"/>
-	                        </td>
-	                    </tr>
-	            </s:iterator>			
+			<s:iterator value="%{getTheQuotes}" var="tsymbol" status="status">
+            <tr>
+                <td><s:property value="#tsymbol.name"/></td>
+                <td><s:property value="#tsymbol.symbol"/></td>
+                <td><s:property value="#tsymbol.price"/></td>
+                <td><s:property value="#tsymbol.change"/></td>
+                <td><s:property value="#tsymbol.percentChange"/></td>
+                <td><s:property value="#tsymbol.volume"/></td>
+                <td><s:property value="#tsymbol.open"/></td>
+                <td><s:property value="#tsymbol.high"/></td>
+                <td><s:property value="#tsymbol.low"/></td>
+                <td><s:submit type="button" value="Remove from WatchList" action="remove" cssClass="" onclick="return setRemoveSymbol('%{#tsymbol.symbol}')"/>
+                </td>
+            </tr>
+            </s:iterator>			
 		</table>
 		</s:form>
 	</s:if>	
 </s:if>
 
 </div>
-
 
 <footer class="bottom-footer">
 <div class="container-fluid">
