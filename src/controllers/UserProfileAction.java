@@ -151,11 +151,23 @@ public class UserProfileAction extends ActionSupport{
 				setWlqhb(WatchListSymbolHelper.getSym(getSymbols()));
 			}
 		}
-			
+
 		if(getWlqhb() != null){
-			ServletActionContext.getRequest().getSession().setAttribute("getTheQuotes", getWlqhb().getWatchListHolder());
-			ServletActionContext.getRequest().getSession().setAttribute("refreshList", "true");
+			if(getWatchlistName() == null){
+				setWatchlistName(null);
+				setWlqhb(null);
+				setWlb(null);
+				setRefreshList(false);
+				setSymbols(null);				
+				ServletActionContext.getRequest().getSession().setAttribute("getTheQuotes", null);
+				ServletActionContext.getRequest().getSession().setAttribute("refreshList", "false");
+			}else{
+				ServletActionContext.getRequest().getSession().setAttribute("getTheQuotes", getWlqhb().getWatchListHolder());
+				ServletActionContext.getRequest().getSession().setAttribute("refreshList", "true");
+			}
+			
 		}else{
+			ServletActionContext.getRequest().getSession().setAttribute("getTheQuotes", null);
 			ServletActionContext.getRequest().getSession().setAttribute("refreshList", "false");
 		}
 			
@@ -218,10 +230,21 @@ public class UserProfileAction extends ActionSupport{
 		String user = ServletActionContext.getRequest().getSession().getAttribute("user").toString();
 		SQLHelper.removeWatchlist(user, getWatchlistName());
 		
+		WatchListsBean wb = new WatchListsBean();
+ 	    wb.setUsername(getUsername());
+ 	    wb.setWatchlists(SQLHelper.getUserWatchLists(getUsername()));
+ 	    ServletActionContext.getRequest().getSession().setAttribute("watchLists", wb);
+		
 		setWatchlistName(null);
+		setWlqhb(null);
+		setWlb(null);
+		setRefreshList(false);
+		setSymbols(null);
+		
 		ServletActionContext.getRequest().getSession().setAttribute("watchlistName", null);
 		ServletActionContext.getRequest().getSession().setAttribute("refreshList", "false");		
-		
+		ServletActionContext.getRequest().getSession().setAttribute("getTheQuotes", null);
+
 		return "REMOVEDWATCHLIST";
 	}
 	
@@ -250,8 +273,5 @@ public class UserProfileAction extends ActionSupport{
 		}
 			
 		return "ADDEDWATCHLIST";
-	}
-
-	
-	
+	}	
 }
