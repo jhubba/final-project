@@ -12,20 +12,36 @@
 <title>Bull-Notes "path of the Bulls"</title>
 </head>
 <body>
+<div class="content">
+<c:if test="${param.user != null}">
+	<c:set var="user" value="${param.user}" scope="session"></c:set>
+</c:if>
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="/Bull-Notes/">BullNotes</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="/Bull-Notes/">Home</a></li>
-      <li><a href="/Bull-Notes/userprofile.jsp">Watchlist</a></li>
-    </ul>
+    </div>   
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="/Bull-Notes/">Home</a></li>
+	      <c:if test="${user != null}" >
+	      	<li><a href="/Bull-Notes/userprofile.jsp">Watchlist</a></li>	
+	      </c:if>	      	
+	    </ul>  
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="/Bull-Notes/login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		<c:choose>
+    		<c:when test="${user != null}">
+    			<c:set var="user" value="${null}" scope="session"></c:set>
+    			<li><a href="/Bull-Notes/logout.jsp"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    		</c:when>
+    		<c:otherwise>
+    			<li><a href="/Bull-Notes/login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    		</c:otherwise>
+    	</c:choose>
     </ul>
   </div>
 </nav>
+
 <div class="container">
 	<div class="row search">
 	    <div class="col-sm-8 col-sm-offset-2">
@@ -34,7 +50,7 @@
 	            <div class="input-group">
 	                <input type="text" id="symbol" name="symbol" class="form-control input-lg" placeholder="Search Symbol...">
 	                <span class="input-group-btn">
-						<button class="btn btn-default btn-lg" type="submit">
+						<button class="btn btn-success btn-lg" type="submit">
 							<span class="glyphicon glyphicon-search"></span>
 						</button>
 	                </span>
@@ -88,5 +104,6 @@
      </div>
 </div>
 </footer>
+</div>
 </body>
 </html>

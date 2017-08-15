@@ -24,30 +24,25 @@
 </script>
 </head>
 <body>
+<div class="content">
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="/Bull-Notes/">BullNotes</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="/Bull-Notes/">Home</a></li>
+      <li><a href="/Bull-Notes/?user=${session.user}">Home</a></li>
       <!-- <li><a href="#">Dashboard</a></li> -->
       <li class="active"><a href="/Bull-Notes/userprofile.jsp">Watchlist</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
+    <li><a id="welcome"><c:out value="Welcome: ${session.user}"/></a></li>
       <li><a href="/Bull-Notes/logout.jsp"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
 
-<c:out value="Welcome: ${session.user}"/> <br>
 <s:actionerror />
-	<form action="addWatchList" method="post">
-		  <input type="text" name="watchlistName" placeholder="Create a new Watchlist"/>
-		  <button type="submit" value="addWatchList">Create New WatchList</button>
-	</form>
-		
-
 <div class="container">
 	<div class="row search">
 	    <div class="col-sm-8 col-sm-offset-2">
@@ -56,7 +51,7 @@
 	            <div class="input-group">
 	                <input type="text" id="symbol" name="symbol" class="form-control input-lg" placeholder="Search Symbol...">
 	                <span class="input-group-btn">
-						<button class="btn btn-default btn-lg" type="submit">
+						<button class="btn btn-success btn-lg" type="submit">
 							<span class="glyphicon glyphicon-search"></span>
 						</button>
 	                </span>
@@ -66,22 +61,25 @@
 	</div><br><br>
 	
 	<c:set var="query" value="${query}"/>
+
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<div class="col-md-2"></div>
 			<div class="col-md-5">
 				<span class="queryName"><c:out value="${ query.name }" /></span> 
 				(<c:out value="${ query.exchange }" />:<c:out value="${ query.symbol }" />)
 				<br><span class="lastPrice"><c:out value="${ query.lastPrice }" /></span> 
 				<c:choose>
-					<c:when test="${ query.netChange > 0 }">
-						<span class="positive"><c:out value="${ query.netChange }" /> (<c:out value="${ query.percentChange }" />)</span>
-					</c:when>
 					<c:when test="${ query.netChange < 0 }">
 						<span class="negative"><c:out value="${ query.netChange }" /> (<c:out value="${ query.percentChange }" />)</span>
+					<style>
+						.panel-default{border-color: #700000 !important;}
+					</style>
 					</c:when>
 					<c:otherwise>
-						<span class="neutral"><c:out value="${ query.netChange }" /> (<c:out value="${ query.percentChange }" />)</span>
+						<span class="positive"><c:out value="${ query.netChange }" /> (<c:out value="${ query.percentChange }" />)</span>
+					<style>
+						.panel-default{border-color: #0d5300 !important;}
+					</style>					
 					</c:otherwise>
 				</c:choose>
 				<br><span class="details">Quote Time: <c:out value="${ query.tradeTimestamp }" /></span>
@@ -94,9 +92,9 @@
 				<br>Open: <c:out value="${ query.open }" />
 				<br>Volume: <c:out value="${ query.volume }" /></span>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<form action="addSymbolToWatchList" method="post">
-					<c:out value="ADD CW:" /><br><input type="submit" name="addSymbol" value="${query.symbol}"/> 
+					<c:out value="Add to Selected Watchlist:" /><br><input id="cwbutton" type="submit" class="form-control" name="addSymbol" value="${query.symbol}"/> 
 		        </form>
 			</div>
 		</div>
@@ -109,19 +107,36 @@
 <s:set var="areTheQuotesEmpty" value="wlqhb" />
 	
 <div class="container">
+	<div class="row">
+	<div class="col-xs-6">
 	<form action='loadWatchList' method='post'>
-		<c:out value="Current WatchList: "/><s:property value="cwl"/><c:out value="     "/><select name='watchlistName' id="watchlist" onchange="this.form.submit()">
+		<c:out value="Current WatchList: "/><s:property value="cwl"/><c:out value="     "/><select name='watchlistName' class="form-control" id="ex6" onchange="this.form.submit()">
 			<option value="default" selected>Select a watch list</option>
 			<c:forEach items="${session.watchLists.getWatchlists()}" var="item">
 				<option value="${item.getWatchListName().toString()}">${item.getWatchListName()}</option>	
 			</c:forEach>	
 		</select>
 	</form>
+	</div>
+<div class="col-lg-6">
+	<span> Creating New Watchlist </span> <br>
+	<form action="addWatchList" method="post">
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-success" type="submit" value="addWatchList"><span class="glyphicon glyphicon-plus"></span></button>
+      </span>
+      <input type="text" class="form-control" name="watchlistName" placeholder="Name your new watchlist">
+    </div>
+    </form>
+  </div>
+	
+	
+</div>
 		
 <s:if test="%{#cwl != null || #rl == true}">
 
 	<form action="removeWatchList" method="post">
-		<c:out value="Remove WatchList: " /><input type="submit" name="watchlistName" value="${cwl}"/> 
+		<c:out value="Remove WatchList: " /><input type="submit" class="form-control" id="watchlistinput" name="watchlistName" value="${cwl}"/> 
 	</form>
 
 	<s:if test ="%{#getTheQuotes != null}">
@@ -169,5 +184,6 @@
      </div>
 </div>
 </footer>
+</div>
 </body>
 </html>
