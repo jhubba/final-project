@@ -35,7 +35,7 @@ public class StaticSymbolsAction implements Serializable {
 			
 			StringBuilder sb = new StringBuilder();		
 			for (int i = 0; i < symbols.length; i++) {
-				sb.append("<div class='col-sm-4'> <span class='label label-default'>")
+				sb.append("<div class='col'> <span class='label label-default'>")
 					.append(symbols[i].toUpperCase() + ": ");
 				if(changes[i] < 0 ) {
 				sb.append("<span class='changenegative'>")

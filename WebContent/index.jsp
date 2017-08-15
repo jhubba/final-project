@@ -17,7 +17,7 @@
 	<c:set var="user" value="${param.user}" scope="session"></c:set>
 </c:if>
 
-<nav class="navbar navbar-inverse">
+<nav id="homenav"class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="/Bull-Notes/">BullNotes</a>
@@ -43,7 +43,7 @@
 </nav>
 
 <div class="container">
-	<div class="row search">
+	<div id="homesearch" class="row">
 	    <div class="col-sm-8 col-sm-offset-2">
 	    
 	        <form action="searchSymbol" method="post">
@@ -57,7 +57,7 @@
 	            </div>
 	        </form>
 	    </div>
-	</div><br><br>
+	</div>
 	
 	<c:set var="query" value="${query}"/>
 	<c:if test="${ not empty query }">

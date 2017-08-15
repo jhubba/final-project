@@ -25,7 +25,7 @@
 </head>
 <body>
 <div class="content">
-<nav class="navbar navbar-inverse">
+<nav id="nav" class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="/Bull-Notes/">BullNotes</a>
@@ -48,7 +48,7 @@
 	    <div class="col-sm-8 col-sm-offset-2">
 	    
 	        <form action="searchSymbolUP" method="post">
-	            <div class="input-group">
+	            <div id="search" class="input-group">
 	                <input type="text" id="symbol" name="symbol" class="form-control input-lg" placeholder="Search Symbol...">
 	                <span class="input-group-btn">
 						<button class="btn btn-success btn-lg" type="submit">
@@ -58,7 +58,7 @@
 	            </div>
 	        </form>
 	    </div>
-	</div><br><br>
+	</div>
 	
 	<c:set var="query" value="${query}"/>
 
@@ -155,7 +155,12 @@
 				<th>Low</th>
 			</tr>
 			<s:iterator value="%{getTheQuotes}" var="tsymbol" status="status">
-            <tr>
+				<s:if test="%{#tsymbol.change < 0}">
+            	<tr class="changenegative">
+            	</s:if>
+            	<s:if test="%{#tsymbol.change >= 0}">
+            	<tr class="changepositive">
+            	</s:if>
                 <td><s:property value="#tsymbol.name"/></td>
                 <td><s:property value="#tsymbol.symbol"/></td>
                 <td><s:property value="#tsymbol.price"/></td>
@@ -165,7 +170,7 @@
                 <td><s:property value="#tsymbol.open"/></td>
                 <td><s:property value="#tsymbol.high"/></td>
                 <td><s:property value="#tsymbol.low"/></td>
-                <td><s:submit type="button" value="Remove from WatchList" action="remove" cssClass="" onclick="return setRemoveSymbol('%{#tsymbol.symbol}')"/>
+                <td><s:submit type="button" value="Remove from WatchList" action="remove" cssClass="btn" onclick="return setRemoveSymbol('%{#tsymbol.symbol}')"/>
                 </td>
             </tr>
             </s:iterator>			
@@ -175,15 +180,17 @@
 </s:if>
 
 </div>
-
+</div>
+</body>
+<div class = row>
 <footer class="bottom-footer">
 <div class="container-fluid">
      <div class="row">
                 <jsp:useBean id="quotes" class="controllers.StaticSymbolsAction" />
 				<jsp:getProperty name="quotes" property="sym" /> 
      </div>
-</div>
+</div>     
 </footer>
 </div>
-</body>
+
 </html>
