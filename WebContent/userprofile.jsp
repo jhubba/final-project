@@ -37,7 +37,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
     <li><a id="welcome"><c:out value="Welcome: ${session.user}"/></a></li>
-      <li><a href="/Bull-Notes/logout.jsp"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      <li><a href="/Bull-Notes/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
@@ -61,7 +61,7 @@
 	</div>
 	
 	<c:set var="query" value="${query}"/>
-
+	<c:if test="${ not empty query }">
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<div class="col-md-5">
@@ -99,6 +99,7 @@
 			</div>
 		</div>
 	</div>
+	</c:if>
 </div>
 
 <s:set var="cwl" value="watchlistName"/>
