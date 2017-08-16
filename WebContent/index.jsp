@@ -32,7 +32,7 @@
 		<c:choose>
     		<c:when test="${user != null}">
     			<c:set var="user" value="${null}" scope="session"></c:set>
-    			<li><a href="/Bull-Notes/logout.jsp"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    			<li><a href="/Bull-Notes/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
     		</c:when>
     		<c:otherwise>
     			<li><a href="/Bull-Notes/login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
