@@ -35,12 +35,21 @@ public class StaticSymbolsAction implements Serializable {
 			
 			StringBuilder sb = new StringBuilder();		
 			for (int i = 0; i < symbols.length; i++) {
-				sb.append("<div class='col'> <span class='label label-default'>")
-					.append(symbols[i].toUpperCase() + ": ");
+				sb.append("<div class='col'> <span class='label label-default'>");
+				
+				switch (symbols[i].toString().toUpperCase()) {
+					case "VOO": sb.append("S&P 500: ");
+						break;
+					case "VTI": sb.append("NASDAQ: ");
+						break;
+					case "IYY": sb.append("Dow Jones: ");
+						break;
+				}
+				
 				if(changes[i] < 0 ) {
-				sb.append("<span class='changenegative'>")
-				.append(prices[i] + " ")
-				.append("</span><span class='changenegative'>" + changes[i]).append("</span></span></div>");
+					sb.append("<span class='changenegative'>")
+						.append(prices[i] + " ")
+						.append("</span><span class='changenegative'>" + changes[i]).append("</span></span></div>");
 				}
 				else {
 				sb.append("<span class='changepositive'>")
