@@ -18,7 +18,7 @@ public class LogoutAction extends ActionSupport {
 		if (ServletActionContext.getRequest().getSession().getAttribute("user") != null) {
 			ServletActionContext.getRequest().getSession().setAttribute("user", null);
 			setUsername(null);
-			return "logoutSuccess";	
+			return "logout";	
 		} else {
 			return ""; 
 		}		
