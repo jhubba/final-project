@@ -201,3 +201,9 @@ button{
 input{
 	color:black;
 }
+.goodbye {
+	background-color:black;
+	color:white;
+	padding:50px;
+	margin-top: -60px;
+}
