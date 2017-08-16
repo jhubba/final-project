@@ -23,10 +23,8 @@
     </ul>
   </div>
 </nav>
-<div class="container">
-
+<div class="goodbye">
 	<h2>You have successfully logged out.</h2>
-	
 </div>
 <footer class="bottom-footer">
 <div class="container-fluid">
