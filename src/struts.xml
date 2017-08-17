@@ -53,7 +53,9 @@
 		</action>
 		
 		<action name="logout" class="controllers.LogoutAction" method="execute">  
-			<result name="logout" >/logout.jsp</result>  
+			<result name="logout" type="redirect">
+				<param name="location">/logout.jsp</param>
+			</result>  
 		</action>  
  	</package>		 		
  </struts>
