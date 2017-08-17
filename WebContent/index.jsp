@@ -13,9 +13,6 @@
 </head>
 <body>
 <div class="content">
-<c:if test="${param.user != null}">
-	<c:set var="user" value="${param.user}" scope="session"></c:set>
-</c:if>
 
 <nav id="homenav"class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -24,9 +21,6 @@
     </div>   
 	    <ul class="nav navbar-nav">
 	      <li class="active"><a href="/Bull-Notes/">Home</a></li>
-	      <c:if test="${user != null}" >
-	      	<li><a href="/Bull-Notes/userprofile.jsp">Watchlist</a></li>	
-	      </c:if>	      	
 	    </ul>  
     <ul class="nav navbar-nav navbar-right">
 		<c:choose>
