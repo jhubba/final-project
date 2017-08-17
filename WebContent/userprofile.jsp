@@ -28,11 +28,9 @@
 <nav id="nav" class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/Bull-Notes/">BullNotes</a>
+      <a class="navbar-brand" href="#">BullNotes</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="/Bull-Notes/?user=${session.user}">Home</a></li>
-      <!-- <li><a href="#">Dashboard</a></li> -->
       <li class="active"><a href="/Bull-Notes/userprofile.jsp">Watchlist</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
