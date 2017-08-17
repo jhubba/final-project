@@ -3,5 +3,5 @@ This is our project software stack/configuration:
   BootStrap
   Struts II
   MySql
-  Tomcat 8
+  Tomcat 8.5.15
   BarcharOnDemand-API
