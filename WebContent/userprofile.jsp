@@ -154,6 +154,7 @@
 				<th>Low</th>
 			</tr>
 			<s:iterator value="%{getTheQuotes}" var="tsymbol" status="status">
+			<tr>
 				<s:if test="%{#tsymbol.change < 0}">
             	<tr class="changenegative">
             	</s:if>
